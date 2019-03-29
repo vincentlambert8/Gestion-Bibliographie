@@ -25,7 +25,7 @@ public:
 			const std::string& p_editeur,
 			int p_annee,
 			const std::string& p_identifiant);
-	virtual Ouvrage* clone() const
+	virtual Reference* clone() const
 		{
 			return new Ouvrage(*this);
 		};
