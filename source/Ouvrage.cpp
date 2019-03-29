@@ -36,7 +36,7 @@ string Ouvrage::reqReferenceFormate() const
 				m_editeur <<
 				", " <<
 				Reference::reqAnnee() <<
-				"." <<
+				". " <<
 				Reference::reqIdentifiant() <<
 				".";
 	string chaineFormatee = chaine.str();

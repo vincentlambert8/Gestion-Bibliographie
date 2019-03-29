@@ -21,26 +21,22 @@ public:
 					const std::string& p_identifiant):
 		Ouvrage(p_auteurs, p_titre, p_ville, p_editeur, p_annee, p_identifiant)
 		{};
-	virtual Reference* clone() const
-	{
-		return new OuvrageDeTest(*this);
-	};
-	virtual std::string reqReferenceFormate() const
-	{
-		return Reference::reqReferenceFormate();
-	};
 };
 
-/*
-class UneReference: public ::testing::Test
+
+class UnOuvrage: public ::testing::Test
 {
 public:
-	UneReference():
-		t_reference("Homayoon Beigi", "Fundamentals of Speaker Recognition", 2011, "ISBN 978-0-387-77591-3")
+	UnOuvrage():
+		t_ouvrage(	"Homayoon Beigi",
+					"Fundamentals of Speaker Recognition",
+					"New York",
+					"Springer",
+					2011,
+					"ISBN 978-0-387-77591-3")
 		{};
-	ReferenceDeTest t_reference;
+	OuvrageDeTest t_ouvrage;
 };
-*/
 
 
 TEST(Ouvrage, ConstructeurAvecParametres)
@@ -49,7 +45,8 @@ TEST(Ouvrage, ConstructeurAvecParametres)
 								"Fundamentals of Speaker Recognition",
 								"New York",
 								"Springer",
-								2011, "ISBN 978-0-387-77591-3");
+								2011,
+								"ISBN 978-0-387-77591-3");
 
 	EXPECT_EQ("Homayoon Beigi", ouvrageTest.reqAuteurs())
 	;
@@ -65,6 +62,21 @@ TEST(Ouvrage, ConstructeurAvecParametres)
 	;
 }
 
+TEST_F(UnOuvrage, requeteVille)
+{
+	EXPECT_EQ("New York", t_ouvrage.reqVille());
+}
+
+TEST_F(UnOuvrage, requeteEditeur)
+{
+	EXPECT_EQ("Springer", t_ouvrage.reqEditeur());
+}
+
+TEST_F(UnOuvrage, AfficherReferenceFormate)
+{
+	EXPECT_EQ("Homayoon Beigi. Fundamentals of Speaker Recognition. New York : Springer, 2011. ISBN 978-0-387-77591-3.",
+			t_ouvrage.reqReferenceFormate());
+}
 
 
 

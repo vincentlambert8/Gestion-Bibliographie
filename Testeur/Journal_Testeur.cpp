@@ -24,26 +24,23 @@ public:
 					const std::string& p_identifiant):
 		Journal(p_auteurs, p_titre, p_nom, p_volume, p_numero, p_page, p_annee, p_identifiant)
 		{};
-	virtual Reference* clone() const
-	{
-		return new JournalDeTest(*this);
-	};
-	virtual std::string reqReferenceFormate() const
-	{
-		return Reference::reqReferenceFormate();
-	};
 };
 
-/*
-class UneReference: public ::testing::Test
+class UnJournal: public ::testing::Test
 {
 public:
-	UneReference():
-		t_reference("Homayoon Beigi", "Fundamentals of Speaker Recognition", 2011, "ISBN 978-0-387-77591-3")
+	UnJournal():
+		t_journal(	"Hart",
+					"A survey of source code management tools for programming courses",
+					"Journal of Computing Sciences in Colleges",
+					24,
+					6,
+					113,
+					2009,
+					"ISSN 1937-4771")
 		{};
-	ReferenceDeTest t_reference;
+	JournalDeTest t_journal;
 };
-*/
 
 
 TEST(Journal, ConstructeurAvecParametres)
@@ -75,3 +72,23 @@ TEST(Journal, ConstructeurAvecParametres)
 	;
 }
 
+TEST_F(UnJournal, requeteVolume)
+{
+	EXPECT_EQ(24, t_journal.reqVolume());
+}
+
+TEST_F(UnJournal, requeteNumero)
+{
+	EXPECT_EQ(6, t_journal.reqNumero());
+}
+
+TEST_F(UnJournal, requetePage)
+{
+	EXPECT_EQ(113, t_journal.reqPage());
+}
+
+TEST_F(UnJournal, AfficherReferenceFormate)
+{
+	EXPECT_EQ("Hart. A survey of source code management tools for programming courses. Journal of Computing Sciences in Colleges, vol. 24, no. 6, pp. 113, 2009. ISSN 1937-4771.",
+				t_journal.reqReferenceFormate());
+}
