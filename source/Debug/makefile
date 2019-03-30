@@ -54,7 +54,7 @@ clean:
 	-@echo ' '
 
 post-build:
-	-ar -r libSource.a ValidationFormat.o
+	-ar -r libSource.a validationFormat.o
 	-@echo ' '
 
 .PHONY: all clean dependents
