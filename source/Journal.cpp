@@ -6,6 +6,8 @@
  */
 
 #include "Journal.h"
+#include "validationFormat.h"
+#include "ContratException.h"
 
 using namespace std;
 
@@ -25,7 +27,21 @@ Journal::Journal(	const string& p_auteurs,
   m_volume(p_volume),
   m_numero(p_numero),
   m_page(p_page)
-{}
+{
+	PRECONDITION(!(m_nom.empty()));
+	PRECONDITION(p_volume >= 0);
+	PRECONDITION(p_numero >= 0);
+	PRECONDITION(p_page > 0);
+	PRECONDITION(util::validerCodeIssn(p_identifiant));
+
+	POSTCONDITION(m_nom == p_nom);
+	POSTCONDITION(m_volume == p_volume);
+	POSTCONDITION(m_numero == p_numero);
+	POSTCONDITION(m_page == p_page);
+
+	INVARIANTS();
+
+}
 
 const string& Journal::reqNom() const
 {
@@ -59,6 +75,14 @@ string Journal::reqReferenceFormate() const
 				Reference::reqIdentifiant() << ".";
 	string chaineFormatee = chaine.str();
 	return chaineFormatee;
+}
+
+void Journal::verifieInvariant() const
+{
+	INVARIANT(!(m_nom.empty()));
+	INVARIANT(m_volume >= 0);
+	INVARIANT(m_numero >= 0);
+	INVARIANT(m_page > 0);
 }
 
 }

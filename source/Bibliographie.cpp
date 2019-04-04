@@ -18,6 +18,14 @@ Bibliographie::Bibliographie(const string& p_nomBibliographie)
 : m_nomBibliographie(p_nomBibliographie), m_nombreReferences(0)
 {}
 
+Bibliographie::~Bibliographie()
+{
+	for (int i = 0; i < m_nombreReferences; i++)
+	{
+		delete [] m_vReferences[0];
+	}
+}
+
 void Bibliographie::ajouterReference(const Reference& p_nouvelleReference)
 {
 	if (!Bibliographie::ReferenceEstDejaPresente(p_nouvelleReference.reqIdentifiant()))

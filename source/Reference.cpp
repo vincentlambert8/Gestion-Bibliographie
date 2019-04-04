@@ -16,11 +16,24 @@ using namespace std;
 namespace biblio
 {
 
+/**
+ * \fn Reference::Reference
+ * \brief Constructeur avec paramètres.
+ * On construit un objet Reference à partir des données passées en paramètres.
+ * \param[in] p_auteurs est le nom de ou des auteurs
+ * \param[in] p_titre est le nom de l'oeuvre
+ * \param[in] p_annee est l'annee de publication de la reference
+ * \param[in] p_identifiant est le code ISBN ou ISSN de la reference
+ * \pre p_auteurs, non vide et contient que des lettres
+ * \pre p_titre, non vide et contient que des lettres
+ * \pre p_annee, est plus grand ou égal à 0
+ * \pre p_identifiant, respecte le format d'un code ISBN/ISSN
+ */
 Reference::Reference(const string& p_auteurs, const string& p_titre, int p_annee, const string& p_identifiant)
 : m_auteurs(p_auteurs), m_titre(p_titre), m_annee(p_annee), m_identifiant(p_identifiant)
 {
 	PRECONDITION(util::validerFormatNom(p_auteurs));
-	PRECONDITION(util::validerFormatNom(p_titre));
+	PRECONDITION(!(m_titre.empty()));
 	PRECONDITION(p_annee >= 0);
 
 	string code = p_identifiant.substr(0, 4);
@@ -30,6 +43,13 @@ Reference::Reference(const string& p_auteurs, const string& p_titre, int p_annee
 	else if (code == "ISBN"){
 		PRECONDITION(util::validerCodeIsbn(p_identifiant));
 	}
+
+	POSTCONDITION(m_auteurs == p_auteurs);
+	POSTCONDITION(m_titre == p_titre);
+	POSTCONDITION(m_annee == p_annee);
+	POSTCONDITION(m_identifiant == p_identifiant);
+
+	INVARIANTS();
 }
 
 /**
@@ -100,8 +120,14 @@ string Reference::reqReferenceFormate() const
  */
 void Reference::asgAuteurs(const string& p_auteurs)
 {
+	PRECONDITION(util::validerFormatNom(p_auteurs));
+
 	if (util::validerFormatNom(p_auteurs))
-	m_auteurs = p_auteurs;
+		m_auteurs = p_auteurs;
+
+	POSTCONDITION(m_auteurs == p_auteurs);
+
+	INVARIANTS();
 }
 
 /**
@@ -119,10 +145,17 @@ bool Reference::operator==(const Reference& autreReference) const
 	return referenceIdentique;
 }
 
-//void Reference::verifieInvariant() const
-//{
-//#	INVARIANTS();
-//}
+/**
+ * \fn Reference::verifieInvariant() const
+ * \brief 	Vérification des invariants de la classe Reference
+ * 			L'invariant de cette classe s'assure que la Reference est valide
+ */
+void Reference::verifieInvariant() const
+{
+	INVARIANT(util::validerFormatNom(m_auteurs));
+	INVARIANT(!(m_titre.empty()));
+	INVARIANT(m_annee >= 0);
+}
 
 }
 

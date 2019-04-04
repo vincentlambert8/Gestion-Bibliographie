@@ -17,12 +17,15 @@ class Bibliographie
 {
 public:
 	Bibliographie(const std::string& p_nomBibliographie);
+	~Bibliographie();
 	void ajouterReference(const Reference& p_nouvelleReference);
 	const std::string reqBibliographieFormate() const;
 	const std::string& reqNomBibliographie() const;
 	const std::vector<Reference*> reqVecteur() const;
 
 private:
+	Bibliographie(const Bibliographie& p_bibliographie);
+	const Bibliographie& operator= (const Bibliographie& p_bibliographie);
 	bool ReferenceEstDejaPresente(const std::string& p_identifiant) const;
 	std::string m_nomBibliographie;
 	std::vector<Reference*> m_vReferences;
