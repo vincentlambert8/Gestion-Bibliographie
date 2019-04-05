@@ -7,33 +7,52 @@
 
 #include "gtest/gtest.h"
 #include "Bibliographie.h"
+#include "Ouvrage.h"
+#include "Journal.h"
+#include "ContratException.h"
 using namespace std;
 using namespace biblio;
 
-
-class BibliographieDeTest: public Bibliographie
+TEST(Bibliographie, ConstructeurAvecNom)
 {
-public:
-	BibliographieDeTest(const string& p_nomBibliographie)
-	: Bibliographie(p_nomBibliographie)
-	{};
+	Bibliographie bibliographieTest("Biblio");
+	EXPECT_EQ("Biblio", bibliographieTest.reqNomBibliographie())
+	;
+}
 
-};
-/*
+TEST(Bibliographie, ConstructeurAvecNomInvalide)
+{
+	ASSERT_THROW(Bibliographie bibliographieTest(""), PreconditionException);
+}
+
 class UneBibliographie: public ::testing::Test
 {
 public:
 	UneBibliographie()
 		: t_bibliographie("Bibliographie")
 		{};
-	BibliographieDeTest t_bibliographie;
+	Bibliographie t_bibliographie;
 
 };
-*/
 
-TEST(Bibliographie, ConstructeurAvecNom)
+class UnJournal: public ::testing::Test
 {
-	BibliographieDeTest bibliographieTest("Biblio");
-	EXPECT_EQ("Biblio", bibliographieTest.reqNomBibliographie())
+public:
+	UnJournal():
+		t_journal(	"Hart",
+					"A survey of source code management tools for programming courses",
+					"Journal of Computing Sciences in Colleges",
+					24,
+					6,
+					113,
+					2009,
+					"ISSN 1937-4771")
+		{};
+	Journal t_journal;
+};
+
+TEST_F(UneBibliographie, ajouterReference)
+{
+	ASSERT_TRUE((t_bibliographie.reqVecteur()).empty())
 	;
 }

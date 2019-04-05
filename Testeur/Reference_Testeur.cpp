@@ -7,6 +7,7 @@
 
 #include "gtest/gtest.h"
 #include "Reference.h"
+#include "ContratException.h"
 #include <string>
 using namespace std;
 using namespace biblio;
@@ -66,6 +67,52 @@ TEST(Reference, ConstructeurAvecParametres)
 	;
 }
 
+TEST(Reference, ConstructeurNomVide)
+{
+	ASSERT_THROW(ReferenceDeTest referenceTest(	" ", "Fundamentals of Speaker Recognition", 2011, "ISBN 978-0-387-77591-3"),
+			PreconditionException) << "Le nom du ou des auteurs ne peut pas être vide";
+}
+
+TEST(Reference, ConstructeurNomInvalide)
+{
+	ASSERT_THROW(ReferenceDeTest referenceTest(	"Toma 2", "Fundamentals of Speaker Recognition", 2011, "ISBN 978-0-387-77591-3"),
+			PreconditionException);
+	ASSERT_THROW(ReferenceDeTest referenceTest(	" Toma", "Fundamentals of Speaker Recognition", 2011, "ISBN 978-0-387-77591-3"),
+				PreconditionException);
+	ASSERT_THROW(ReferenceDeTest referenceTest(	"Homayoon-Beigi", "Fundamentals of Speaker Recognition", 2011, "ISBN 978-0-387-77591-3"),
+				PreconditionException);
+	ASSERT_THROW(ReferenceDeTest referenceTest(	"1 Homayoon", "Fundamentals of Speaker Recognition", 2011, "ISBN 978-0-387-77591-3"),
+				PreconditionException);
+}
+
+TEST(Reference, ConstructeurTitreInvalide)
+{
+	ASSERT_THROW(ReferenceDeTest referenceTest(	"Homayoon Beigi", "", 2011, "ISBN 978-0-387-77591-3"),
+			PreconditionException) << "Le titre doit être non vide";
+}
+
+TEST(Reference, ConstructeurAnneeInvalide)
+{
+	ASSERT_THROW(ReferenceDeTest referenceTest(	"Homayoon Beigi", "Fundamentals of Speaker Recognition", -1, "ISBN 978-0-387-77591-3"),
+			PreconditionException) << "L'année ne peut pas être négative";
+}
+
+TEST(Reference, ConstructeurIdentifiantInvalide)
+{
+	ASSERT_THROW(ReferenceDeTest referenceTest(	"Homayoon Beigi", "Fundamentals of Speaker Recognition", 2011, "978-0-387-77591-3"),
+				PreconditionException);
+	ASSERT_THROW(ReferenceDeTest referenceTest(	"Homayoon Beigi", "Fundamentals of Speaker Recognition", 2011, "ISSN 978-0-387-77591-3"),
+					PreconditionException);
+	ASSERT_THROW(ReferenceDeTest referenceTest(	"Homayoon Beigi", "Fundamentals of Speaker Recognition", 2011, "ISBN 978-0-387-77591-2"),
+					PreconditionException);
+	ASSERT_THROW(ReferenceDeTest referenceTest(	"Homayoon Beigi", "Fundamentals of Speaker Recognition", 2011, "ISBN 978-0-387-775913"),
+						PreconditionException);
+	ASSERT_THROW(ReferenceDeTest referenceTest(	"Homayoon Beigi", "Fundamentals of Speaker Recognition", 2011, "ISBN 9780387775913"),
+						PreconditionException);
+	ASSERT_THROW(ReferenceDeTest referenceTest(	"Homayoon Beigi", "Fundamentals of Speaker Recognition", 2011, "ISBN 98-0-387-77591-2"),
+						PreconditionException);
+}
+
 TEST_F(UneReference, MutateurAuteurs)
 {
 	EXPECT_EQ("Homayoon Beigi", t_reference.reqAuteurs())
@@ -115,6 +162,13 @@ TEST_F(UneReference, OperateurEgalite)
 	ASSERT_FALSE(t_reference == t_reference4);
 	ASSERT_FALSE(t_reference == t_reference5);
 	ASSERT_FALSE(t_reference == t_reference6);
+}
+
+TEST_F(UneReference, MethodeClone)
+{
+	Reference *clone = t_reference.clone();
+	ASSERT_EQ(t_reference.reqReferenceFormate(), clone->reqReferenceFormate())
+	;
 }
 
 

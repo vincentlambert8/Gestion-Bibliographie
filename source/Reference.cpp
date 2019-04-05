@@ -43,6 +43,10 @@ Reference::Reference(const string& p_auteurs, const string& p_titre, int p_annee
 	else if (code == "ISBN"){
 		PRECONDITION(util::validerCodeIsbn(p_identifiant));
 	}
+	else
+	{
+		PRECONDITION(util::validerCodeIsbn(p_identifiant) || util::validerCodeIssn(p_identifiant));
+	}
 
 	POSTCONDITION(m_auteurs == p_auteurs);
 	POSTCONDITION(m_titre == p_titre);
