@@ -16,6 +16,13 @@
 using namespace std;
 using namespace biblio;
 
+
+/**
+ * \fn Ouvrage creerOuvrage()
+ * \brief Fonction permettant de construire un objet Ouvrage
+ *
+ * \return Un objet ouvrage si les données entrées par l'utilisateur sont valides
+ */
 Ouvrage creerOuvrage()
 {
 	string nomAuteurOuvrage;
@@ -108,6 +115,12 @@ Ouvrage creerOuvrage()
 	return ouvrage;
 }
 
+/**
+ * \fn Journal creerJournal()
+ * \brief Fonction permettant de construire un objet Journal
+ *
+ * \return Un objet journal si les données entrées par l'utilisateur sont valides
+ */
 Journal creerJournal()
 {
 	string nomAuteurJournal;
@@ -258,7 +271,12 @@ string reqNomBibliographie()
 }
 
 
-
+/**
+ * \fn int main()
+ * \brief Entrée du programme
+ *
+ * \return 0 - Arrêt normal du programme
+ */
 int main()
 {
 	cout << "Création du premier ouvrage" << endl;
@@ -297,6 +315,7 @@ int main()
 	bibliographie.ajouterReference(deuxiemeJournal);
 
 	cout << bibliographie.reqBibliographieFormate() << endl;
+
 
 	return 0;
 }

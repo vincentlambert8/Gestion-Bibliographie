@@ -11,7 +11,20 @@
 using namespace std;
 using namespace biblio;
 
-
+/**
+ * \brief 	Test du constructeur Ouvrage(	const std::string& p_auteurs,
+										const std::string& p_titre,
+										const std::string& p_ville,
+										const std::string& p_editeur,
+										int p_annee,
+										const std::string& p_identifiant)
+			cas valide:
+				ConstructeurAvecParamètres: Création d'un objet Ouvrage avec tous les paramètres nécessaires.
+											Chaque attribut doit correspondre à son paramètre respectif.
+			cas invalide:
+				ConstructeurVilleInvalide: Le format du paramètre p_ville n'est pas valide
+				ConstructeurEditeurInvalide: Le format du paramètre p_editeur n'est pas valide
+ */
 TEST(Ouvrage, ConstructeurAvecParametres)
 {
 	Ouvrage ouvrageTest(	"Homayoon Beigi",
@@ -57,7 +70,7 @@ TEST(Ouvrage, ConstructeurEditeurInvalide)
 
 /**
  * \class UnOuvrage
- * \brief Fixture pour les tests avec un objet ouvrage
+ * \brief Fixture UnOuvrage pour la création d'un objet Ouvrage pour les tests
  */
 class UnOuvrage: public ::testing::Test
 {
@@ -73,22 +86,49 @@ public:
 	Ouvrage t_ouvrage;
 };
 
+/**
+ * \brief 	Test de la méthode const std::string& reqVille() const
+ * 			cas valide:
+ * 				requeteVille: vérification du retour
+ * 			cas invalide:
+ * 				Aucun identifié
+ */
 TEST_F(UnOuvrage, requeteVille)
 {
-	EXPECT_EQ("New York", t_ouvrage.reqVille());
+	ASSERT_EQ("New York", t_ouvrage.reqVille());
 }
 
+/**
+ * \brief	Test de la méthode const std::string& reqEditeur() const
+ * 			cas valide:
+ * 				requeteEditeur: vérification du retour
+ * 			cas invalide:
+ * 				Aucun identifié
+ */
 TEST_F(UnOuvrage, requeteEditeur)
 {
-	EXPECT_EQ("Springer", t_ouvrage.reqEditeur());
+	ASSERT_EQ("Springer", t_ouvrage.reqEditeur());
 }
 
+/**
+ * \brief 	Test de la méthode std::string reqReferenceFormate() const
+ * 			cas valide:
+ * 				AfficherReferenceFormate: vérification du retour
+ * 			cas invalide:
+ * 				Aucun identifié
+ */
 TEST_F(UnOuvrage, AfficherReferenceFormate)
 {
 	EXPECT_EQ("Homayoon Beigi. Fundamentals of Speaker Recognition. New York : Springer, 2011. ISBN 978-0-387-77591-3.",
 			t_ouvrage.reqReferenceFormate());
 }
 
+/**
+ * \brief	Test de la méthode virtual Reference* clone() const
+ * 			cas valide:
+ * 				MethodeClone: 	création d'une référence clone à partir d'un ouvrage de base et utilisation de la
+ * 								méthode reqReferenceFormate pour vérification de la concordance entre les deux objets
+ */
 TEST_F(UnOuvrage, MethodeClone)
 {
 	Reference* clone = t_ouvrage.clone();

@@ -12,6 +12,24 @@
 using namespace std;
 using namespace biblio;
 
+/**
+ * \brief	Test du Constructeur Journal(	const string& p_auteurs,
+											const string& p_titre,
+											const string& p_nom,
+											int p_volume,
+											int p_numero,
+											int p_page,
+											int p_annee,
+											const string& p_identifiant)
+			cas valide:
+				ConstructeurAvecParametres: Création d'un objet Journal avec tous les paramètres nécessaires.
+											Chaque attribut doit correspondre à son paramètre respectif.
+			cas invalide:
+				ConstructeurNomInvalide: Le paramètre p_nom ne doit pas être vide
+				ConstructeurVolumeInvalide: Le paramètre p_volume ne doit pas être négatif
+				ConstructeurNumeroInvalide: Le paramètre p_numero ne doit pas être négatif
+				ConstructeurPageInvalide: Le paramètre p_page doit être plus grand que 0
+ */
 TEST(Journal, ConstructeurAvecParametres)
 {
 	Journal journalTest(	"Hart",
@@ -72,6 +90,10 @@ TEST(Journal, ConstructeurPageInvalide)
 						PreconditionException);
 }
 
+/**
+ * \class UnJournal
+ * \brief Fixture UnJournal pour la création d'un objet Journal pour les tests
+ */
 class UnJournal: public ::testing::Test
 {
 public:
@@ -88,27 +110,62 @@ public:
 	Journal t_journal;
 };
 
+/**
+ * \brief	Test de la méthode const int& reqVolume() const
+ * 			cas valide:
+ * 				requeteVolume: vérification du retour
+ * 			cas invalide:
+ * 				Aucun identifié
+ */
 TEST_F(UnJournal, requeteVolume)
 {
 	EXPECT_EQ(24, t_journal.reqVolume());
 }
 
+/**
+ * \brief	Test de la méthode const int& reqNumero() const
+ * 			cas valide:
+ * 				requeteNumero: vérification du retour
+ * 			cas invalide:
+ * 				Aucun identifié
+ */
 TEST_F(UnJournal, requeteNumero)
 {
 	EXPECT_EQ(6, t_journal.reqNumero());
 }
 
+/**
+ * \brief	Test de la méthode const int& reqPage() const
+ * 			cas valide:
+ * 				requetePage: vérification du retour
+ * 			cas invalide:
+ * 				Aucun identifié
+ */
 TEST_F(UnJournal, requetePage)
 {
 	EXPECT_EQ(113, t_journal.reqPage());
 }
 
+/**
+ * \brief	Test de la méthode std::string reqReferenceFormate() const
+ * 			cas valide:
+ * 				AfficherReferenceFormate:	La méthode doit retourner une string avec l'information relative à l'objet
+ * 											dans le format prescrit
+ * 			cas invalide:
+ * 				Aucun identifié
+ */
 TEST_F(UnJournal, AfficherReferenceFormate)
 {
 	EXPECT_EQ("Hart. A survey of source code management tools for programming courses. Journal of Computing Sciences in Colleges, vol. 24, no. 6, pp. 113, 2009. ISSN 1937-4771.",
 				t_journal.reqReferenceFormate());
 }
 
+/**
+ * \brief	Test de la méthode virtual Reference* clone() const
+ * 			cas valide:
+ * 				MethodeClone: 	création d'un référence clone à partir d'un journal de base et utilisation de la
+ * 								méthode reqReferenceFormate pour vérification de la concordance entre les deux objets
+ */
 TEST_F(UnJournal, MethodeClone)
 {
 	Reference* clone = t_journal.clone();

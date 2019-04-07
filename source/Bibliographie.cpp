@@ -36,7 +36,8 @@ Bibliographie::~Bibliographie()
 {
 	for (int i = 0; i < m_nombreReferences; i++)
 	{
-		delete [] m_vReferences[0];
+		cout << "Destruction de la référence " << i + 1 << endl;
+ 		delete [] m_vReferences[0];
 	}
 }
 
