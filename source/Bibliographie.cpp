@@ -34,10 +34,9 @@ Bibliographie::Bibliographie(const string& p_nomBibliographie)
  */
 Bibliographie::~Bibliographie()
 {
-	for (int i = 0; i < m_nombreReferences; i++)
+	for (vector<Reference*>::iterator i = m_vReferences.begin(); i != m_vReferences.end(); ++i)
 	{
-		cout << "Destruction de la référence " << i + 1 << endl;
- 		delete [] m_vReferences[0];
+ 		delete *i;
 	}
 }
 

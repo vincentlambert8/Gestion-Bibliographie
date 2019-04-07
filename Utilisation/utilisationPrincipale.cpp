@@ -316,7 +316,6 @@ int main()
 
 	cout << bibliographie.reqBibliographieFormate() << endl;
 
-
+	cout << "Fin du programme..." << endl;
 	return 0;
 }
-
