@@ -40,77 +40,78 @@ Ouvrage creerOuvrage()
 	bool editeurEstValide = false;
 
 	while (nomEstValide == false)
+	{
+		cout << "Entrez le nom du ou des auteurs" << endl;
+		getline(cin, nomAuteurOuvrage);
+
+		if (util::validerFormatNom(nomAuteurOuvrage))
 		{
-			cout << "Entrez le nom du ou des auteurs" << endl;
-			getline(cin, nomAuteurOuvrage);
-
-			if (util::validerFormatNom(nomAuteurOuvrage))
-			{
-				nomEstValide = true;
-				cout << "Le(s) nom(s) est(sont) valide(s)" << endl;
-			}
+			nomEstValide = true;
+			cout << "Le(s) nom(s) est(sont) valide(s)" << endl;
 		}
+	}
 
-		while (identifiantEstValide == false)
+	while (titreEstValide == false)
+	{
+		cout << "Entrez le nom de l'ouvrage" << endl;
+		getline(cin, titreOuvrage);
+
+		if (util::validerFormatNom(titreOuvrage))
 		{
-			cout << "Entrez le code IBSN de l'ouvrage" << endl;
-			getline(cin, identifiantOuvrage);
-
-			if (util::validerCodeIsbn(identifiantOuvrage))
-			{
-				identifiantEstValide = true;
-				cout << "L'identifiant est valide" << endl;
-			}
+			titreEstValide = true;
+			cout << "Titre valide" << endl;
 		}
+	}
 
-		while (titreEstValide == false)
+	while (villeEstValide == false)
+	{
+		cout << "Entrez le nom de la ville d'édition" << endl;
+		getline(cin, villeOuvrage);
+
+		if (util::validerFormatNom(villeOuvrage))
 		{
-			cout << "Entrez le nom de l'ouvrage" << endl;
-			getline(cin, titreOuvrage);
-
-			if (util::validerFormatNom(titreOuvrage))
-			{
-				titreEstValide = true;
-				cout << "Titre valide" << endl;
-			}
+			villeEstValide = true;
+			cout << "Ville valide" << endl;
 		}
+	}
 
-		while (villeEstValide == false)
+	while (editeurEstValide == false)
+	{
+		cout << "Entrez le nom de l'éditeur" << endl;
+		getline(cin, editeurOuvrage);
+
+		if (util::validerFormatNom(editeurOuvrage))
 		{
-			cout << "Entrez le nom de la ville d'édition" << endl;
-			getline(cin, villeOuvrage);
-
-			if (util::validerFormatNom(villeOuvrage))
-			{
-				villeEstValide = true;
-				cout << "Ville valide" << endl;
-			}
+			editeurEstValide = true;
+			cout << "Editeur valide" << endl;
 		}
+	}
 
-		while (editeurEstValide == false)
+	while (anneeEstValide == false)
+	{
+		cout << "Entrez l'année d'édition de l'ouvrage" << endl;
+		cin >> anneeOuvrage;
+
+		if (anneeOuvrage >= 0)
 		{
-			cout << "Entrez le nom de l'éditeur" << endl;
-			getline(cin, editeurOuvrage);
-
-			if (util::validerFormatNom(editeurOuvrage))
-			{
-				editeurEstValide = true;
-				cout << "Editeur valide" << endl;
-			}
+			anneeEstValide = true;
+			cout << "Année valide" << endl;
 		}
-
-		while (anneeEstValide == false)
-		{
-			cout << "Entrez l'année d'édition de l'ouvrage" << endl;
-			cin >> anneeOuvrage;
-
-			if (anneeOuvrage >= 0)
-			{
-				anneeEstValide = true;
-				cout << "Année valide" << endl;
-			}
-		}
+	}
 	cin.ignore();
+
+	while (identifiantEstValide == false)
+	{
+		cout << "Entrez le code IBSN de l'ouvrage" << endl;
+		getline(cin, identifiantOuvrage);
+
+		if (util::validerCodeIsbn(identifiantOuvrage))
+		{
+			identifiantEstValide = true;
+			cout << "L'identifiant est valide" << endl;
+		}
+	}
+
 	Ouvrage ouvrage(nomAuteurOuvrage, titreOuvrage, villeOuvrage, editeurOuvrage, anneeOuvrage, identifiantOuvrage);
 	return ouvrage;
 }
@@ -153,18 +154,6 @@ Journal creerJournal()
 		}
 	}
 
-	while (identifiantEstValide == false)
-	{
-		cout << "Entrez le code ISSN du journal" << endl;
-		getline(cin, identifiantJournal);
-
-		if (util::validerCodeIssn(identifiantJournal))
-		{
-			identifiantEstValide = true;
-			cout << "L'identifiant est valide" << endl;
-		}
-	}
-
 	while (titreEstValide == false)
 	{
 		cout << "Entrez le titre de la référence dans le journal" << endl;
@@ -186,18 +175,6 @@ Journal creerJournal()
 		{
 			nomEstValide = true;
 			cout << "Nom valide" << endl;
-		}
-	}
-
-	while (anneeEstValide == false)
-	{
-		cout << "Entrez l'année de publication du journal" << endl;
-		cin >> anneeJournal;
-
-		if (anneeJournal >= 0)
-		{
-			anneeEstValide = true;
-			cout << "Année valide" << endl;
 		}
 	}
 
@@ -239,6 +216,32 @@ Journal creerJournal()
 			cout << "Page valide" << endl;
 		}
 	}
+
+	while (anneeEstValide == false)
+	{
+		cout << "Entrez l'année de publication du journal" << endl;
+		cin >> anneeJournal;
+
+		if (anneeJournal >= 0)
+		{
+			anneeEstValide = true;
+			cout << "Année valide" << endl;
+		}
+	}
+	cin.ignore();
+
+	while (identifiantEstValide == false)
+	{
+		cout << "Entrez le code ISSN du journal" << endl;
+		getline(cin, identifiantJournal);
+
+		if (util::validerCodeIssn(identifiantJournal))
+		{
+			identifiantEstValide = true;
+			cout << "L'identifiant est valide" << endl;
+		}
+	}
+
 	Journal journal(nomAuteurJournal,
 					titreJournal,
 					nomJournal,
@@ -250,6 +253,13 @@ Journal creerJournal()
 	return journal;
 }
 
+/**
+ * \fn string reqNomBibliographie()
+ * \brief 	Fonction permettant de demander à l'utilisateur le nom de la bibliographie
+ * 			qu'il souhaite créer
+ *
+ * 	\return nomBibliographie, le nom entré par l'utilisateur qui est dans un format valide
+ */
 string reqNomBibliographie()
 {
 	string nomBibliographie;
@@ -263,7 +273,7 @@ string reqNomBibliographie()
 		if (util::validerFormatNom(nomBibliographie))
 		{
 			nomEstValide = true;
-			cout << "Nom valide" << endl;
+			cout << "Nom bibliographie valide" << endl;
 
 		}
 	}
@@ -300,7 +310,7 @@ int main()
 	cout << deuxiemeJournal.reqReferenceFormate() << endl;
 
 	Bibliographie bibliographie(reqNomBibliographie());
-	cout << "Création de la bibligraphie ..." << endl;
+	cout << endl << "Création de la bibliographie ..." << endl;
 
 	cout << "Ajout du premier ouvrage à la bibliographie..." << endl;
 	bibliographie.ajouterReference(premierOuvrage);
@@ -314,8 +324,9 @@ int main()
 	cout << "Ajout deuxieme journal à la bibliographie..." << endl;
 	bibliographie.ajouterReference(deuxiemeJournal);
 
-	cout << bibliographie.reqBibliographieFormate() << endl;
+	cout << endl << bibliographie.reqBibliographieFormate() << endl;
 
+	cout << "Fin de la bibliographie" << endl;
 	cout << "Fin du programme..." << endl;
 	return 0;
 }

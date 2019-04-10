@@ -79,7 +79,7 @@ const vector<Reference*> Bibliographie::reqVecteur() const
 const string Bibliographie::reqBibliographieFormate() const
 {
 	ostringstream os;
-	os << "Bibliographie" << endl;
+	os << this->reqNomBibliographie() << endl;
 	os << "===============================" << endl;
 	for (int i = 0; i < m_nombreReferences; i++)
 	{

@@ -139,7 +139,7 @@ TEST(Bibliographie, requeteReferenceFormate)
 						"ISBN 978-0-387-77591-3");
 	bibliographieTest.ajouterReference(t_ouvrage);
 
-	os << "Bibliographie" << endl;
+	os << "Biblio" << endl;
 	os << "===============================" << endl;
 	os << "[" << 1 << "]" << " " << t_ouvrage.reqReferenceFormate() << endl;
 	ASSERT_EQ(os.str(), bibliographieTest.reqBibliographieFormate())
