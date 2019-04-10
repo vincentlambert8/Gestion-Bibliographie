@@ -110,7 +110,7 @@ const string& Bibliographie::reqNomBibliographie() const
 bool Bibliographie::ReferenceEstDejaPresente(const std::string& p_identifiant) const
 {
 	bool estDejaPresente = false;
-	for (int i = 0; i < m_nombreReferences; i++)
+	for (float i = 0; i < m_vReferences.size(); i++)
 	{
 		if (m_vReferences[i]->reqIdentifiant() == p_identifiant)
 		{

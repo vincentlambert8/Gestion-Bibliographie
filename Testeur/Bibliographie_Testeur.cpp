@@ -91,6 +91,36 @@ TEST(Bibliographie, ajouterReference)
 }
 
 /**
+ * \brief	Test de la méthode void ajouterReference(const Reference& p_nouvelleReference)
+ * 			cas invalide:
+ * 				ajouterReferenceDejaPresente:	vérification qu'il n'est pas possible d'ajouter une référence
+ * 												déjà présente dans la bibliographie. En ajoutant 2 fois la même
+ * 												référence, la longueur du vecteur reste la même car la référence
+ * 												n'est pas ajouté deux fois
+ */
+TEST(Bibliographie, ajouterReferenceDejaPresente)
+{
+	Bibliographie bibliographieTest("Biblio");
+	Ouvrage t_ouvrage(	"Homayoon Beigi",
+						"Fundamentals of Speaker Recognition",
+						"New York",
+						"Springer",
+						2011,
+						"ISBN 978-0-387-77591-3");
+	ASSERT_TRUE((bibliographieTest.reqVecteur()).empty())
+	;
+	bibliographieTest.ajouterReference(t_ouvrage);
+	ASSERT_FALSE((bibliographieTest.reqVecteur()).empty())
+	;
+	ASSERT_EQ(1, (bibliographieTest.reqVecteur()).size())
+	;
+	bibliographieTest.ajouterReference(t_ouvrage);
+	ASSERT_EQ(1, (bibliographieTest.reqVecteur()).size())
+	;
+}
+
+
+/**
  * \brief 	Test de la méthode const std::string reqBibliographieFormate() const
  * 			cas valide:
  * 				requeteReferenceFormate: Vérification du retour selon le format prescrit
