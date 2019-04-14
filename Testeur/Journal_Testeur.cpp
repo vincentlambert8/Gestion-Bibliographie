@@ -1,10 +1,10 @@
-/*
- * Journal_Testeur.cpp
- *
- *  Created on: 2019-03-28
- *      Author: etudiant
+/**
+ * \file Journal_Testeur.cpp
+ * \brief Ensemble des tests des méthodes pour la classe Journal
+ * \author Toma Gagne
+ * \version 1
+ * \date 10 avril 2019
  */
-
 
 #include "gtest/gtest.h"
 #include "Journal.h"

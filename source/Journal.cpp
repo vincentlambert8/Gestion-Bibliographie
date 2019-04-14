@@ -1,8 +1,9 @@
-/*
- * Journal.cpp
- *
- *  Created on: 2019-03-24
- *      Author: etudiant
+/**
+ * \file Journal.cpp
+ * \brief Implémentation des méthodes de la classe Journal
+ * \author Toma Gagne
+ * \version 1
+ * \date 10 avril 2019
  */
 
 #include "Journal.h"
@@ -31,6 +32,10 @@ namespace biblio
  * \pre p_page, est plus grand que 0
  * \pre p_annee, est plus grand ou égal à 0
  * \pre p_identifiant, respecte le format d'un code ISSN
+ * \post L'attribut m_nom équivaut à p_nom passé en paramètre
+ * \post L'attribut m_volume équivaut à p_volume passé en paramètre
+ * \post L'attribut m_numero équivaut à p_numero passé en paramètre
+ * \post L'attrinut m_page équivaut à p_page passé en paramètre
  */
 Journal::Journal(	const string& p_auteurs,
 					const string& p_titre,
@@ -46,7 +51,7 @@ Journal::Journal(	const string& p_auteurs,
   m_numero(p_numero),
   m_page(p_page)
 {
-	PRECONDITION(!(m_nom.empty()));
+	PRECONDITION(!(p_nom.empty()));
 	PRECONDITION(p_volume >= 0);
 	PRECONDITION(p_numero >= 0);
 	PRECONDITION(p_page > 0);

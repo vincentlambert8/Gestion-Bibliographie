@@ -1,4 +1,10 @@
-
+/**
+ * \file Ouvrage.cpp
+ * \brief Implémentation des méthodes de la classe Ouvrage
+ * \author Toma Gagne
+ * \version 1
+ * \date 10 avril 2019
+ */
 
 #include "Ouvrage.h"
 #include "validationFormat.h"
@@ -25,6 +31,8 @@ namespace biblio
  * \pre p_editeur, non vide et contient que des lettres
  * \pre p_annee, est plus grand ou égal à 0
  * \pre p_identifiant, respecte le format d'un code ISBN/ISSN
+ * \post L'attribut m_ville équivaut à p_ville passé en paramètre
+ * \post L'attribut m_editeur équivaut à p_editeur passé en paramètre
  */
 Ouvrage::Ouvrage(	const string& p_auteurs,
 					const string& p_titre,

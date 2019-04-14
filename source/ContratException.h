@@ -1,9 +1,10 @@
-/*
- * ContratException.h
- *
- *  Created on: 2019-03-25
- *      Author: etudiant
- */
+/**
+*\file ContratException.h
+*\brief Header de la classe ContratException
+*\author Toma Gagne
+*\version 1
+*\date 10 avril 2019
+*/
 
 #ifndef CONTRATEXCEPTION_H_
 #define CONTRATEXCEPTION_H_

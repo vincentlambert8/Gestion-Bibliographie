@@ -3,7 +3,7 @@
  *\brief Header de la classe Reference
  *\author Toma Gagne
  *\version 1
- *\date 22 fevrier 2019
+ *\date 27 fevrier 2019
  */
 
 #ifndef REFERENCE_H_

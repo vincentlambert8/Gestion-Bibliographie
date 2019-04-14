@@ -1,9 +1,10 @@
-/*
- * Journal.h
- *
- *  Created on: 2019-03-24
- *      Author: etudiant
- */
+/**
+*\file Journal.h
+*\brief Header de la classe Journal
+*\author Toma Gagne
+*\version 1
+*\date 10 avril 2019
+*/
 
 #ifndef DEBUG_JOURNAL_H_
 #define DEBUG_JOURNAL_H_
@@ -27,6 +28,7 @@ public:
 			int p_page,
 			int p_annee,
 			const std::string& p_identifiant);
+	~Journal(){};
 	virtual Reference* clone() const
 	{
 		return new Journal(*this);

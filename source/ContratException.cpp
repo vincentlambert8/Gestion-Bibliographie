@@ -1,8 +1,9 @@
-/*
- * ContratException.cpp
- *
- *  Created on: 2019-03-25
- *      Author: etudiant
+/**
+ * \file ContratException.cpp
+ * \brief Implémentation des méthodes de la classe ContratException
+ * \author Toma Gagne
+ * \version 1
+ * \date 10 avril 2019
  */
 
 #include "ContratException.h"

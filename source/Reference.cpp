@@ -1,9 +1,9 @@
 /**
  * \file Reference.cpp
- * \brief Implementation des methodes de la classe Reference
+ * \brief Implémentation des méthodes de la classe Reference
  * \author Toma Gagne
  * \version 1
- * \date 22 fevrier 2019
+ * \date 10 avril 2019
  */
 
 #include "Reference.h"
@@ -28,12 +28,16 @@ namespace biblio
  * \pre p_titre, non vide et contient que des lettres
  * \pre p_annee, est plus grand ou égal à 0
  * \pre p_identifiant, respecte le format d'un code ISBN/ISSN
+ * \post L'attribut m_auteur équivaut à p_auteurs passé en paramètre
+ * \post L'attribut m_titre équivaut à p_titre passé en paramètre
+ * \post L'attribut m_annee équivaut à p_annee passé en paramètre
+ * \post L'attribut m_identifiant équivaut à p_identifiant passé en paramètre
  */
 Reference::Reference(const string& p_auteurs, const string& p_titre, int p_annee, const string& p_identifiant)
 : m_auteurs(p_auteurs), m_titre(p_titre), m_annee(p_annee), m_identifiant(p_identifiant)
 {
 	PRECONDITION(util::validerFormatNom(p_auteurs));
-	PRECONDITION(!(m_titre.empty()));
+	PRECONDITION(!(p_titre.empty()));
 	PRECONDITION(p_annee >= 0);
 
 	string code = p_identifiant.substr(0, 4);
@@ -119,7 +123,7 @@ string Reference::reqReferenceFormate() const
  * \brief Methode permettant de modifier les auteurs d'une reference
  * \param[in] p_auteur est le nom de l'auteur ou des auteurs
  * \pre p_auteurs ne doit pas etre nul et doit avoir un format valide
- * \post l'objet courant a été correctement assigne
+ * \post L'attribut m_auteurs équivaut à p_auteurs passé en paramètre
  * \return m_auteurs
  */
 void Reference::asgAuteurs(const string& p_auteurs)
@@ -137,7 +141,7 @@ void Reference::asgAuteurs(const string& p_auteurs)
 /**
  * \fn Reference::operator==()
  * \brief Surcharge de l'operateur "==" pour comparer deux objets Reference
- * \return un booleen
+ * \return un booleen, vrai si les deux objets Reference sont identiques
  */
 bool Reference::operator==(const Reference& autreReference) const
 {

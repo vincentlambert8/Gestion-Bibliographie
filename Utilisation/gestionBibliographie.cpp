@@ -1,8 +1,9 @@
-/*
- * utilisationPrincipale.cpp
- *
- *  Created on: 2019-03-28
- *      Author: etudiant
+/**
+ * \file gestionBibliographie.cpp
+ * \brief fichier principal pour gérer 2 ouvrages et 2 journaux dans une bibliographie
+ * \author Toma Gagne
+ * \version 1
+ * \date 10 avril 2019
  */
 
 #include "Reference.h"
@@ -47,7 +48,7 @@ Ouvrage creerOuvrage()
 		if (util::validerFormatNom(nomAuteurOuvrage))
 		{
 			nomEstValide = true;
-			cout << "Le(s) nom(s) est(sont) valide(s)" << endl;
+			cout << "Nom(s) valide(s)" << endl;
 		}
 	}
 
@@ -92,17 +93,24 @@ Ouvrage creerOuvrage()
 		cout << "Entrez l'année d'édition de l'ouvrage" << endl;
 		cin >> anneeOuvrage;
 
-		if (anneeOuvrage >= 0)
+		if (cin.fail() || anneeOuvrage <= 0)
 		{
-			anneeEstValide = true;
 			cout << "Année valide" << endl;
+			cin.clear();
+			cin.ignore();
+			continue;
+		}
+		else
+		{
+			cout << "Année invalide" << endl;
+			anneeEstValide = true;
 		}
 	}
 	cin.ignore();
 
 	while (identifiantEstValide == false)
 	{
-		cout << "Entrez le code IBSN de l'ouvrage" << endl;
+		cout << "Entrez le code ISBN de l'ouvrage" << endl;
 		getline(cin, identifiantOuvrage);
 
 		if (util::validerCodeIsbn(identifiantOuvrage))
@@ -150,7 +158,7 @@ Journal creerJournal()
 		if (util::validerFormatNom(nomAuteurJournal))
 		{
 			auteurEstValide = true;
-			cout << "Le(s) nom(s) est(sont) valide(s)" << endl;
+			cout << "Nom(s) valide(s)" << endl;
 		}
 	}
 
@@ -182,12 +190,18 @@ Journal creerJournal()
 	{
 		cout << "Entrez le volume de la référence publiée dans le journal" << endl;
 		cin >> volumeJournal;
-		cin.ignore();
 
-		if (volumeJournal >= 0)
+		if (cin.fail() || volumeJournal < 0)
 		{
-			volumeEstValide = true;
+			cout << "Volume invalide" << endl;
+			cin.clear();
+			cin.ignore();
+			continue;
+		}
+		else
+		{
 			cout << "Volume valide" << endl;
+			volumeEstValide = true;
 		}
 	}
 
@@ -195,12 +209,17 @@ Journal creerJournal()
 	{
 		cout << "Entrez le numero de la référence dans le journal" << endl;
 		cin >> numeroJournal;
-		cin.ignore();
-
-		if (numeroJournal >= 0)
+		if (cin.fail() || numeroJournal < 0)
 		{
+			cout << "Numéro invalide" << endl;
+			cin.clear();
+			cin.ignore();
+			continue;
+		}
+		else
+		{
+			cout << "Numéro valide" << endl;
 			numeroEstValide = true;
-			cout << "Numero valide" << endl;
 		}
 	}
 
@@ -208,24 +227,37 @@ Journal creerJournal()
 	{
 		cout << "Entrez la page où commence la référence publiée dans le journal" << endl;
 		cin >> pageJournal;
-		cin.ignore();
-
-		if (pageJournal >= 0)
+		if (cin.fail() || pageJournal <= 0)
 		{
-			pageEstValide = true;
+			cout << "Page invalide" << endl;
+			cin.clear();
+			cin.ignore();
+			continue;
+		}
+		else
+		{
 			cout << "Page valide" << endl;
+			pageEstValide = true;
 		}
 	}
+	cin.ignore();
 
 	while (anneeEstValide == false)
 	{
 		cout << "Entrez l'année de publication du journal" << endl;
 		cin >> anneeJournal;
 
-		if (anneeJournal >= 0)
+		if (cin.fail() || anneeJournal <= 0)
 		{
-			anneeEstValide = true;
+			cout << "Année invalide" << endl;
+			cin.clear();
+			cin.ignore();
+			continue;
+		}
+		else
+		{
 			cout << "Année valide" << endl;
+			anneeEstValide = true;
 		}
 	}
 	cin.ignore();
@@ -289,41 +321,42 @@ string reqNomBibliographie()
  */
 int main()
 {
-	cout << "Création du premier ouvrage" << endl;
+	Bibliographie bibliographie(reqNomBibliographie());
+	cout << "Création de la bibliographie ..." << endl;
+
+	cout << endl << "Ajoutez un premier ouvrage" << endl;
 	Ouvrage premierOuvrage = creerOuvrage();
 	cout << "Les informations du premier ouvrage sont: " << endl;
 	cout << premierOuvrage.reqReferenceFormate() << endl;
 
-	cout << "Création du deuxième ouvrage" << endl;
+	cout << "Ajout du premier ouvrage à la bibliographie..." << endl;
+	bibliographie.ajouterReference(premierOuvrage);
+
+	cout << endl << "Ajoutez un deuxième ouvrage" << endl;
 	Ouvrage deuxiemeOuvrage = creerOuvrage();
 	cout << "Les informations du deuxième ouvrage sont: " << endl;
 	cout << deuxiemeOuvrage.reqReferenceFormate() << endl;
 
-	cout << "Création du premier journal" << endl;
+	cout << "Ajout du deuxième ouvrage à la bibliographie..." << endl;
+	bibliographie.ajouterReference(deuxiemeOuvrage);
+
+	cout << endl << "Ajoutez un premier journal" << endl;
 	Journal premierJournal = creerJournal();
 	cout << "Les informations du premier journal sont: " << endl;
 	cout << premierJournal.reqReferenceFormate() << endl;
 
-	cout << "Création du deuxième journal" << endl;
+	cout << "Ajout du premier journal à la bibliographie..." << endl;
+	bibliographie.ajouterReference(premierJournal);
+
+	cout << endl << "Ajoutez un deuxième journal" << endl;
 	Journal deuxiemeJournal = creerJournal();
 	cout << "Les informations du deuxième journal sont: " << endl;
 	cout << deuxiemeJournal.reqReferenceFormate() << endl;
 
-	Bibliographie bibliographie(reqNomBibliographie());
-	cout << endl << "Création de la bibliographie ..." << endl;
-
-	cout << "Ajout du premier ouvrage à la bibliographie..." << endl;
-	bibliographie.ajouterReference(premierOuvrage);
-
-	cout << "Ajout du deuxième ouvrage à la bibliographie..." << endl;
-	bibliographie.ajouterReference(deuxiemeOuvrage);
-
-	cout << "Ajout du premier journal à la bibliographie..." << endl;
-	bibliographie.ajouterReference(premierJournal);
-
-	cout << "Ajout deuxieme journal à la bibliographie..." << endl;
+	cout << "Ajout du deuxième journal à la bibliographie..." << endl;
 	bibliographie.ajouterReference(deuxiemeJournal);
 
+	cout << endl << "Références bibliographiques enregistrées :" << endl;
 	cout << endl << bibliographie.reqBibliographieFormate() << endl;
 
 	cout << "Fin de la bibliographie" << endl;

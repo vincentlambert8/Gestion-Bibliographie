@@ -1,8 +1,9 @@
-/*
- * Ouvrage_Testeur.cpp
- *
- *  Created on: 2019-03-28
- *      Author: etudiant
+/**
+ * \file Ouvrage_Testeur.cpp
+ * \brief Ensemble des tests des méthodes pour la classe Ouvrage
+ * \author Toma Gagne
+ * \version 1
+ * \date 10 avril 2019
  */
 
 #include "gtest/gtest.h"

@@ -1,8 +1,9 @@
-/*
- * Bibliographie_Testeur.cpp
- *
- *  Created on: 2019-03-28
- *      Author: etudiant
+/**
+ * \file Bibliographie_Testeur.cpp
+ * \brief Ensemble des tests des méthodes pour la classe Bibliographie
+ * \author Toma Gagne
+ * \version 1
+ * \date 10 avril 2019
  */
 
 #include "gtest/gtest.h"
@@ -87,6 +88,27 @@ TEST(Bibliographie, ajouterReference)
 							"ISSN 1937-4771");
 	bibliographieTest.ajouterReference(journalTest);
 	ASSERT_EQ(journalTest.reqReferenceFormate(), (bibliographieTest.reqVecteur())[1]->reqReferenceFormate())
+	;
+}
+
+TEST(Bibliographie, supprimerReference)
+{
+	Bibliographie bibliographieTest("Biblio");
+	Ouvrage t_ouvrage(	"Homayoon Beigi",
+						"Fundamentals of Speaker Recognition",
+						"New York",
+						"Springer",
+						2011,
+						"ISBN 978-0-387-77591-3");
+	ASSERT_TRUE((bibliographieTest.reqVecteur()).empty())
+	;
+	bibliographieTest.ajouterReference(t_ouvrage);
+	ASSERT_FALSE((bibliographieTest.reqVecteur()).empty())
+	;
+	ASSERT_EQ(t_ouvrage.reqReferenceFormate(), (bibliographieTest.reqVecteur())[0]->reqReferenceFormate())
+	;
+	bibliographieTest.supprimerReference("ISBN 978-0-387-77591-3");
+	ASSERT_TRUE(bibliographieTest.reqVecteur().empty())
 	;
 }
 

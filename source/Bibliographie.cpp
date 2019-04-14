@@ -1,9 +1,11 @@
-/*
- * Bibliographie.cpp
- *
- *  Created on: 2019-03-24
- *      Author: etudiant
+/**
+ * \file Bibliographie.cpp
+ * \brief Implémentation des méthodes de la classe Bibliographie
+ * \author Toma Gagne
+ * \version 1
+ * \date 10 avril 2019
  */
+
 
 #include <iostream>
 #include "Bibliographie.h"
@@ -19,14 +21,16 @@ namespace biblio
  * \brief Constructeur de la classe Bibliographie
  * \param[in] p_nomBibliographie est le nom de la bibliographie
  * \pre p_nomBibliographie, non vide
+ * \post L'attribut m_nomBibliographie équivaut à p_nomBibliographie passé en paramètre
  */
 Bibliographie::Bibliographie(const string& p_nomBibliographie)
-: m_nomBibliographie(p_nomBibliographie), m_nombreReferences(0)
+: m_nomBibliographie(p_nomBibliographie)
 	{
 		PRECONDITION(!(p_nomBibliographie.empty()));
 
 		POSTCONDITION(m_nomBibliographie == p_nomBibliographie);
-		POSTCONDITION(m_nombreReferences == 0);
+
+		INVARIANTS();
 	}
 
 /**
@@ -50,13 +54,29 @@ void Bibliographie::ajouterReference(const Reference& p_nouvelleReference)
 {
 	if (!Bibliographie::ReferenceEstDejaPresente(p_nouvelleReference.reqIdentifiant()))
 	{
-		m_nombreReferences += 1;
 		m_vReferences.push_back(p_nouvelleReference.clone());
 	}
-	else
+}
+
+void Bibliographie::supprimerReference(const string& p_identifiant)
+{
+	for (unsigned int i = 0; i < m_vReferences.size(); i++)
 	{
-		cout << "La référence est déjà présente dans la bibliographie" << endl;
+		if (m_vReferences[i]->reqIdentifiant() == p_identifiant)
+		{
+			m_vReferences.erase(m_vReferences.begin() + i); // ca fonctionne
+		}
 	}
+
+	/*
+	for (vector<Reference*>::iterator iter = m_vReferences.begin(); iter != m_vReferences.end(); ++iter)
+	{
+		if ((*iter)->reqIdentifiant() == p_identifiant)
+			{
+				m_vReferences.erase(iter); // ca ne fonctionne pas
+			}
+	}
+	*/
 }
 
 /**
@@ -81,7 +101,7 @@ const string Bibliographie::reqBibliographieFormate() const
 	ostringstream os;
 	os << this->reqNomBibliographie() << endl;
 	os << "===============================" << endl;
-	for (int i = 0; i < m_nombreReferences; i++)
+	for (float i = 0; i < m_vReferences.size(); i++)
 	{
 		os << "[" << i + 1 << "]" << " " << (*m_vReferences[i]).reqReferenceFormate();
 		os << endl;
@@ -118,6 +138,11 @@ bool Bibliographie::ReferenceEstDejaPresente(const std::string& p_identifiant) c
 		}
 	}
 	return estDejaPresente;
+}
+
+void Bibliographie::verifieInvariant() const
+{
+	INVARIANT(!(m_nomBibliographie.empty()));
 }
 
 }

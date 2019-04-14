@@ -1,9 +1,10 @@
-/*
- * Ouvrage.h
- *
- *  Created on: 2019-03-25
- *      Author: etudiant
- */
+/**
+*\file Ouvrage.h
+*\brief Header de la classe Ouvrage
+*\author Toma Gagne
+*\version 1
+*\date 27 10 avril 2019
+*/
 
 #ifndef OUVRAGE_H_
 #define OUVRAGE_H_
@@ -25,6 +26,7 @@ public:
 			const std::string& p_editeur,
 			int p_annee,
 			const std::string& p_identifiant);
+	~Ouvrage(){};
 	virtual Reference* clone() const
 		{
 			return new Ouvrage(*this);
