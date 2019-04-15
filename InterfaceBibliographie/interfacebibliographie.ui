@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Interface TP4</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="Quitter">
@@ -68,13 +68,14 @@
     <addaction name="actionOuvrage"/>
     <addaction name="actionJournal"/>
    </widget>
-   <widget class="QMenu" name="menuSupprimer_une_r_f_rence">
+   <widget class="QMenu" name="menuSupprimerReference">
     <property name="title">
      <string>Supprimer une référence</string>
     </property>
+    <addaction name="actionSupprimer"/>
    </widget>
    <addaction name="menuAjouter_une_r_f_rence"/>
-   <addaction name="menuSupprimer_une_r_f_rence"/>
+   <addaction name="menuSupprimerReference"/>
   </widget>
   <action name="actionOuvrage">
    <property name="text">
@@ -84,6 +85,11 @@
   <action name="actionJournal">
    <property name="text">
     <string>Ajouter un journal</string>
+   </property>
+  </action>
+  <action name="actionSupprimer">
+   <property name="text">
+    <string>Supprimer</string>
    </property>
   </action>
  </widget>

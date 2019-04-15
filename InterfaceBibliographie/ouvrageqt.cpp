@@ -45,42 +45,70 @@ void OuvrageQt::validerSaisie()
 	{
 		QString message = "Le nom du ou des auteurs ne doit pas être vide";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	if (!(util::validerFormatNom(this->reqAuteurs())))
 	{
 		QString message = "Le nom du ou des auteurs doit être dans un format valide";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	if (ui.lineEdit_titreOuvrage->text().isEmpty())
 	{
 		QString message = "Le titre ne doit pas être vide";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	if (!(util::validerFormatNom(this->reqVille())))
 	{
 		QString message = "Le nom de la ville doit être dans un format valide";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
+	}
+
+	if (ui.lineEdit_villeOuvrage->text().isEmpty())
+	{
+		QString message = "La ville ne doit pas être vide";
+		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	if (!(util::validerFormatNom(this->reqEditeur())))
 	{
 		QString message = "Le nom de l'éditeur doit être dans un format valide";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
+	}
+
+	if (ui.lineEdit_editeurOuvrage->text().isEmpty())
+	{
+		QString message = "L'éditeur ne doit pas être vide";
+		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	if (this->reqAnnee() < 0)
 	{
 		QString message = "L'année doit être plus grande ou égale à 0";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	if (!(util::validerCodeIsbn(this->reqIdentifiant())))
 	{
 		QString message = "Le code ISBN de l'identifiant n'est pas valide";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
+	}
+
+	if (ui.lineEdit_identifiantOuvrage->text().isEmpty())
+	{
+		QString message = "L'identifiant ne peut pas être vide";
+		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	else{

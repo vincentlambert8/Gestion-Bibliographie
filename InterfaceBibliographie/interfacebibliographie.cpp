@@ -3,6 +3,7 @@
 #include "Ouvrage.h"
 #include "journalqt.h"
 #include "Journal.h"
+#include "supprimerreference.h"
 #include "Bibliographie.h"
 #include <qmessagebox.h>
 
@@ -17,6 +18,7 @@ InterfaceBibliographie::InterfaceBibliographie(QWidget *parent, string p_nomBibl
 	QObject::connect(ui.actionOuvrage, SIGNAL(triggered()), this, SLOT(ajouterOuvrage()));
 	QObject::connect(ui.actionJournal, SIGNAL(triggered()), this, SLOT(ajouterJournal()));
 	QObject::connect(ui.pushButton_afficherBiblio, SIGNAL(clicked()), this, SLOT(afficherBibliographie()));
+	QObject::connect(ui.actionSupprimer, SIGNAL(triggered()), this, SLOT(supprimerUneReference()));
 }
 
 InterfaceBibliographie::~InterfaceBibliographie()
@@ -109,10 +111,45 @@ void InterfaceBibliographie::afficherBibliographie()
 {
 	QString q(QString::fromStdString(m_bibliographie.reqBibliographieFormate()));
 	ui.textEdit->setText(q);
-	/*
-	for (vector<Reference*>::iterator it = (m_bibliographie.reqVecteur()).begin(); (m_bibliographie.reqVecteur()).end();it++)
+}
+
+void InterfaceBibliographie::supprimerUneReference()
+{
+	supprimerReference supprimerQt;
+	if (supprimerQt.exec())
 	{
-		QString q(QString::fromStdString(())
+		enregistrerSuppressionReference(supprimerQt.reqIdentifiant());
 	}
-	*/
+
+}
+
+void InterfaceBibliographie::enregistrerSuppressionReference(const string& p_identifiant)
+{
+	try{
+		if (verifierReferenceAbsente(p_identifiant))
+		{
+			throw ReferenceAbsenteException("La référence est absente de la bibliographie");
+		}
+		else
+		{
+			m_bibliographie.supprimerReference(p_identifiant);
+		}
+	}catch(const ReferenceAbsenteException& p_e){
+		QString message(p_e.what());
+		QMessageBox::information(this, "Message d'erreur", message);
+	}
+}
+
+bool InterfaceBibliographie::verifierReferenceAbsente(const string& p_identifiant)
+{
+	bool estAbsente = true;
+	for (size_t i = 0; i < (m_bibliographie.reqVecteur()).size(); i++)
+	{
+		if ((m_bibliographie.reqVecteur())[i]->reqIdentifiant() == p_identifiant)
+		{
+			estAbsente = false;
+		}
+	}
+	return estAbsente;
+
 }

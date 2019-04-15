@@ -12,6 +12,7 @@
 #include "ContratException.h"
 #include <string>
 #include <sstream>
+#include "ReferenceException.h"
 
 using namespace std;
 namespace biblio
@@ -52,31 +53,42 @@ Bibliographie::~Bibliographie()
  */
 void Bibliographie::ajouterReference(const Reference& p_nouvelleReference)
 {
-	if (!Bibliographie::ReferenceEstDejaPresente(p_nouvelleReference.reqIdentifiant()))
-	{
-		m_vReferences.push_back(p_nouvelleReference.clone());
+	try{
+		if (Bibliographie::ReferenceEstDejaPresente(p_nouvelleReference.reqIdentifiant()))
+			{
+				throw ReferenceDejaPresenteException(p_nouvelleReference.reqReferenceFormate());
+			}
+		else
+		{
+			m_vReferences.push_back(p_nouvelleReference.clone());
+		}
+	}catch(const ReferenceDejaPresenteException& p_e){
+		cout << p_e.what() << endl;
 	}
 }
 
 void Bibliographie::supprimerReference(const string& p_identifiant)
 {
-	for (unsigned int i = 0; i < m_vReferences.size(); i++)
-	{
-		if (m_vReferences[i]->reqIdentifiant() == p_identifiant)
+	try{
+		if (ReferenceAbsente(p_identifiant))
 		{
-			m_vReferences.erase(m_vReferences.begin() + i); // ca fonctionne
+			throw ReferenceAbsenteException("La référence est absente de la bibliographie");
 		}
-	}
-
-	/*
-	for (vector<Reference*>::iterator iter = m_vReferences.begin(); iter != m_vReferences.end(); ++iter)
-	{
-		if ((*iter)->reqIdentifiant() == p_identifiant)
+		else
+		{
+			for (vector<Reference*>::iterator it = m_vReferences.begin(); it < m_vReferences.end(); it++)
 			{
-				m_vReferences.erase(iter); // ca ne fonctionne pas
+				if ((*it)->reqIdentifiant() == p_identifiant)
+				{
+					delete *it;
+					m_vReferences.erase(it); // ca fonctionne
+				}
 			}
+		}
+	}catch (const ReferenceAbsenteException& p_e)
+	{
+		cout << p_e.what() << endl;
 	}
-	*/
 }
 
 /**
@@ -138,6 +150,19 @@ bool Bibliographie::ReferenceEstDejaPresente(const std::string& p_identifiant) c
 		}
 	}
 	return estDejaPresente;
+}
+
+bool Bibliographie::ReferenceAbsente(const std::string & p_identifiant) const
+{
+	bool estAbsente = true;
+	for (size_t i = 0; i < m_vReferences.size(); i++)
+	{
+		if (m_vReferences[i]->reqIdentifiant() == p_identifiant)
+		{
+			estAbsente = false;
+		}
+	}
+	return estAbsente;
 }
 
 void Bibliographie::verifieInvariant() const

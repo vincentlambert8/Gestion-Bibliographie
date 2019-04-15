@@ -29,6 +29,7 @@ private:
 	Bibliographie(const Bibliographie& p_bibliographie);
 	const Bibliographie& operator= (const Bibliographie& p_bibliographie);
 	bool ReferenceEstDejaPresente(const std::string& p_identifiant) const;
+	bool ReferenceAbsente(const std::string& p_identifiant) const;
 	std::string m_nomBibliographie;
 	std::vector<Reference*> m_vReferences;
 	void verifieInvariant() const;

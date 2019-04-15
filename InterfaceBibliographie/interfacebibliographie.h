@@ -34,11 +34,13 @@ private slots:
 							int p_annee,
 							const std::string& p_identifiant);
 	void afficherBibliographie();
+	void supprimerUneReference();
+	void enregistrerSuppressionReference(const std::string& p_identifiant);
+	bool verifierReferenceAbsente(const std::string& p_identifiant);
 
 private:
     Ui::InterfaceBibliographieClass ui;
     biblio::Bibliographie m_bibliographie;
-    std::vector<biblio::Reference*> m_vReferences;
 };
 
 #endif // INTERFACEBIBLIOGRAPHIE_H

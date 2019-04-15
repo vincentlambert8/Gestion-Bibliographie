@@ -60,54 +60,70 @@ void JournalQt::validerSaisie()
 	{
 		QString message = "Le nom du ou des auteurs ne doit pas être vide";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	if (!(util::validerFormatNom(this->reqAuteurs())))
 	{
 		QString message = "Le nom du ou des auteurs doit être dans un format valide";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	if (ui.lineEdit_titreJournal->text().isEmpty())
 	{
 		QString message = "Le titre ne doit pas être vide";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	if (ui.lineEdit_nomJournal->text().isEmpty())
 	{
 		QString message = "Le nom du journal ne doit pas être vide ";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	if (this->reqVolume() < 0)
 	{
 		QString message = "Le numéro de volume doit être plus grand ou égal à 0";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	if (this->reqNumero() < 0)
 	{
 		QString message = "Le numéro du journal doit être plus grand ou égal à 0";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	if (this->reqPage() <= 0)
 	{
 		QString message = "Le numéro de la page doit être plus grand que 0";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	if (this->reqAnnee() < 0)
 	{
 		QString message = "L'année doit être plus grande ou égale à 0";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	if (!(util::validerCodeIssn(this->reqIdentifiant())))
 	{
 		QString message = "Le code ISSN de l'identifiant n'est pas valide";
 		QMessageBox::information(this, "Message d'erreur", message);
+		return;
+	}
+
+	if (ui.lineEdit_identifiantJournal->text().isEmpty())
+	{
+		QString message = "L'identifiant ne peut pas être vide";
+		QMessageBox::information(this, "Message d'erreur", message);
+		return;
 	}
 
 	else{

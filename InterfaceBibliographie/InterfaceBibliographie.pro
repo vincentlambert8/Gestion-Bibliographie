@@ -2,14 +2,17 @@ TEMPLATE = app
 TARGET = InterfaceBibliographie
 QT += core \
     gui
-HEADERS += journalqt.h \
+HEADERS += supprimerreference.h \
+    journalqt.h \
     ouvrageqt.h \
     interfacebibliographie.h
-SOURCES += journalqt.cpp \
+SOURCES += supprimerreference.cpp \
+    journalqt.cpp \
     ouvrageqt.cpp \
     main.cpp \
     interfacebibliographie.cpp
-FORMS += journalqt.ui \
+FORMS += supprimerreference.ui \
+    journalqt.ui \
     ouvrageqt.ui \
     interfacebibliographie.ui
 RESOURCES += 
