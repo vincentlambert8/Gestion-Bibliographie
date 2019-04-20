@@ -32,7 +32,8 @@ TEST(Bibliographie, ConstructeurAvecNom)
 
 TEST(Bibliographie, ConstructeurAvecNomInvalide)
 {
-	ASSERT_THROW(Bibliographie bibliographieTest(""), PreconditionException);
+	ASSERT_THROW(Bibliographie bibliographieTest(""), PreconditionException)
+			<< "Le nom de la bibliographie inscrit est invalide.";
 }
 
 
@@ -60,22 +61,24 @@ public:
  * 			cas invalide:
  * 				ajouterReferenceDejaPresente:	vérification qu'il n'est pas possible d'ajouter une référence
  * 												déjà présente dans la bibliographie.
+ *
+ * 				ajouterReferenceInvalide:		vérification qu'il n'est pas possible d'ajouter une référence avec
+ * 												paramètres invalides dans la bibliographie.
  */
-TEST(Bibliographie, ajouterReference)
+TEST_F(UneBibliographie, ajouterReference)
 {
-	Bibliographie bibliographieTest("Biblio");
 	Ouvrage t_ouvrage(	"Homayoon Beigi",
 						"Fundamentals of Speaker Recognition",
 						"New York",
 						"Springer",
 						2011,
 						"ISBN 978-0-387-77591-3");
-	EXPECT_TRUE((bibliographieTest.reqVecteur()).empty())
+	EXPECT_TRUE((t_bibliographie.reqVecteur()).empty())
 	;
-	bibliographieTest.ajouterReference(t_ouvrage);
-	EXPECT_FALSE((bibliographieTest.reqVecteur()).empty())
+	t_bibliographie.ajouterReference(t_ouvrage);
+	EXPECT_FALSE((t_bibliographie.reqVecteur()).empty())
 	;
-	ASSERT_EQ(t_ouvrage.reqReferenceFormate(), (bibliographieTest.reqVecteur())[0]->reqReferenceFormate())
+	ASSERT_EQ(t_ouvrage.reqReferenceFormate(), (t_bibliographie.reqVecteur()[0]->reqReferenceFormate()))
 	;
 
 	Journal journalTest(	"Hart",
@@ -86,29 +89,8 @@ TEST(Bibliographie, ajouterReference)
 							113,
 							2009,
 							"ISSN 1937-4771");
-	bibliographieTest.ajouterReference(journalTest);
-	ASSERT_EQ(journalTest.reqReferenceFormate(), (bibliographieTest.reqVecteur())[1]->reqReferenceFormate())
-	;
-}
-
-TEST(Bibliographie, supprimerReference)
-{
-	Bibliographie bibliographieTest("Biblio");
-	Ouvrage t_ouvrage(	"Homayoon Beigi",
-						"Fundamentals of Speaker Recognition",
-						"New York",
-						"Springer",
-						2011,
-						"ISBN 978-0-387-77591-3");
-	ASSERT_TRUE((bibliographieTest.reqVecteur()).empty())
-	;
-	bibliographieTest.ajouterReference(t_ouvrage);
-	ASSERT_FALSE((bibliographieTest.reqVecteur()).empty())
-	;
-	ASSERT_EQ(t_ouvrage.reqReferenceFormate(), (bibliographieTest.reqVecteur())[0]->reqReferenceFormate())
-	;
-	bibliographieTest.supprimerReference("ISBN 978-0-387-77591-3");
-	ASSERT_TRUE(bibliographieTest.reqVecteur().empty())
+	t_bibliographie.ajouterReference(journalTest);
+	ASSERT_EQ(journalTest.reqReferenceFormate(), (t_bibliographie.reqVecteur()[1]->reqReferenceFormate()))
 	;
 }
 
@@ -120,24 +102,54 @@ TEST(Bibliographie, supprimerReference)
  * 												référence, la longueur du vecteur reste la même car la référence
  * 												n'est pas ajouté deux fois
  */
-TEST(Bibliographie, ajouterReferenceDejaPresente)
+TEST_F(UneBibliographie, ajouterReferenceDejaPresente)
 {
-	Bibliographie bibliographieTest("Biblio");
 	Ouvrage t_ouvrage(	"Homayoon Beigi",
 						"Fundamentals of Speaker Recognition",
 						"New York",
 						"Springer",
 						2011,
 						"ISBN 978-0-387-77591-3");
-	ASSERT_TRUE((bibliographieTest.reqVecteur()).empty())
+	ASSERT_TRUE((t_bibliographie.reqVecteur()).empty())
 	;
-	bibliographieTest.ajouterReference(t_ouvrage);
-	ASSERT_FALSE((bibliographieTest.reqVecteur()).empty())
+	t_bibliographie.ajouterReference(t_ouvrage);
+	ASSERT_FALSE((t_bibliographie.reqVecteur()).empty())
 	;
-	ASSERT_EQ(1, (bibliographieTest.reqVecteur()).size())
+	ASSERT_EQ(1, (t_bibliographie.reqVecteur().size()))
 	;
-	bibliographieTest.ajouterReference(t_ouvrage);
-	ASSERT_EQ(1, (bibliographieTest.reqVecteur()).size())
+	t_bibliographie.ajouterReference(t_ouvrage);
+	ASSERT_EQ(1, (t_bibliographie.reqVecteur().size()))
+	;
+}
+
+
+/**
+ * \brief	Test de la méthode void supprimerReference(const string& p_identifiant)
+ * 			cas valide:
+ * 				ajouterReference: 	vérification que l'objet Bibliographie est vide au départ, ajout d'une référence,
+ * 									vérification que l'objet Bibliographie n'est plus vide. Vérification que ce que contient le vecteur contient
+ * 									est bien la référence ajoutée
+ * 									Supression de la référence et vérification que la taille du conteneur est à nouveau vide
+ * 			cas invalide:
+ * 				Aucun identifié
+ */
+TEST_F(UneBibliographie, supprimerReference)
+{
+	Ouvrage t_ouvrage(	"Homayoon Beigi",
+						"Fundamentals of Speaker Recognition",
+						"New York",
+						"Springer",
+						2011,
+						"ISBN 978-0-387-77591-3");
+	ASSERT_TRUE((t_bibliographie.reqVecteur()).empty())
+	;
+	t_bibliographie.ajouterReference(t_ouvrage);
+	ASSERT_FALSE((t_bibliographie.reqVecteur()).empty())
+	;
+	ASSERT_EQ(t_ouvrage.reqReferenceFormate(), (t_bibliographie.reqVecteur()[0]->reqReferenceFormate()))
+	;
+	t_bibliographie.supprimerReference(t_ouvrage.reqIdentifiant());
+	ASSERT_TRUE(t_bibliographie.reqVecteur().empty())
 	;
 }
 
@@ -149,21 +161,20 @@ TEST(Bibliographie, ajouterReferenceDejaPresente)
  * 			cas invalide:
  * 				Aucun identifié
  */
-TEST(Bibliographie, requeteReferenceFormate)
+TEST_F(UneBibliographie, requeteReferenceFormate)
 {
 	ostringstream os;
-	Bibliographie bibliographieTest("Biblio");
 	Ouvrage t_ouvrage(	"Homayoon Beigi",
 						"Fundamentals of Speaker Recognition",
 						"New York",
 						"Springer",
 						2011,
 						"ISBN 978-0-387-77591-3");
-	bibliographieTest.ajouterReference(t_ouvrage);
+	t_bibliographie.ajouterReference(t_ouvrage);
 
-	os << "Biblio" << endl;
+	os << "Bibliographie" << endl;
 	os << "===============================" << endl;
 	os << "[" << 1 << "]" << " " << t_ouvrage.reqReferenceFormate() << endl;
-	ASSERT_EQ(os.str(), bibliographieTest.reqBibliographieFormate())
+	ASSERT_EQ(os.str(), t_bibliographie.reqBibliographieFormate())
 	;
 }

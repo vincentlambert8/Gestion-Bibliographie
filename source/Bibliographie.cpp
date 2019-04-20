@@ -36,6 +36,7 @@ Bibliographie::Bibliographie(const string& p_nomBibliographie)
 
 /**
  * \brief Destructeur de la classe Bibliographie
+ * \post Toutes références d'une biliographie doivent être désallouer dans le vecteur
  */
 Bibliographie::~Bibliographie()
 {
@@ -67,6 +68,12 @@ void Bibliographie::ajouterReference(const Reference& p_nouvelleReference)
 	}
 }
 
+/**
+ * \fn Bibliographie::supprimerReference(const string& p_identifiant)
+ * \brief Méthode permettant de supprimer une référence à la bibliographie courante
+ * \param[in] p_identifiant est le code ISBN/ISSN de la référence à supprimer de la bibliographie
+ * \pre[in] p_identifiant ne doit pas être absent de la bibliographie
+ */
 void Bibliographie::supprimerReference(const string& p_identifiant)
 {
 	try{
@@ -113,7 +120,7 @@ const string Bibliographie::reqBibliographieFormate() const
 	ostringstream os;
 	os << this->reqNomBibliographie() << endl;
 	os << "===============================" << endl;
-	for (float i = 0; i < m_vReferences.size(); i++)
+	for (size_t i = 0; i < m_vReferences.size(); i++)
 	{
 		os << "[" << i + 1 << "]" << " " << (*m_vReferences[i]).reqReferenceFormate();
 		os << endl;
@@ -142,7 +149,7 @@ const string& Bibliographie::reqNomBibliographie() const
 bool Bibliographie::ReferenceEstDejaPresente(const std::string& p_identifiant) const
 {
 	bool estDejaPresente = false;
-	for (float i = 0; i < m_vReferences.size(); i++)
+	for (size_t i = 0; i < m_vReferences.size(); i++)
 	{
 		if (m_vReferences[i]->reqIdentifiant() == p_identifiant)
 		{
@@ -152,6 +159,13 @@ bool Bibliographie::ReferenceEstDejaPresente(const std::string& p_identifiant) c
 	return estDejaPresente;
 }
 
+/**
+ * \fn bool Bibliographie::ReferenceAbsente(const std::string & p_identifiant) const
+ * \brief Méthode permettant de vérifier si une référence est absente dans la bibliographie courante
+ * \param[in] p_identifiant est l'identifiant de la référence dont on vérifie l'absence dans la biliographie
+ *
+ * \return Un booléen, vrai si la référence testée est absente dans la bibliographie courante
+ */
 bool Bibliographie::ReferenceAbsente(const std::string & p_identifiant) const
 {
 	bool estAbsente = true;
@@ -165,6 +179,11 @@ bool Bibliographie::ReferenceAbsente(const std::string & p_identifiant) const
 	return estAbsente;
 }
 
+/**
+ * \fn Bibliographie::verifieInvariant() const
+ * \brief Vérification de l'invariant
+ * \post L'attribut m_nomBibliographie ne doit pas être vide
+ */
 void Bibliographie::verifieInvariant() const
 {
 	INVARIANT(!(m_nomBibliographie.empty()));
