@@ -22,7 +22,7 @@ static const uint qt_meta_data_InterfaceBibliographie[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -39,6 +39,8 @@ static const uint qt_meta_data_InterfaceBibliographie[] = {
      441,   23,   23,   23, 0x08,
      465,  188,   23,   23, 0x08,
      510,  188,  183,   23, 0x08,
+     548,   23,   23,   23, 0x08,
+     595,  571,   23,   23, 0x08,
 
        0        // eod
 };
@@ -57,6 +59,8 @@ static const char qt_meta_stringdata_InterfaceBibliographie[] = {
     "afficherBibliographie()\0supprimerUneReference()\0"
     "enregistrerSuppressionReference(std::string)\0"
     "verifierReferenceAbsente(std::string)\0"
+    "modifierUneReference()\0p_identifiant,p_auteurs\0"
+    "enregistrerModificationReference(std::string,std::string)\0"
 };
 
 void InterfaceBibliographie::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -76,6 +80,8 @@ void InterfaceBibliographie::qt_static_metacall(QObject *_o, QMetaObject::Call _
         case 7: _t->enregistrerSuppressionReference((*reinterpret_cast< const std::string(*)>(_a[1]))); break;
         case 8: { bool _r = _t->verifierReferenceAbsente((*reinterpret_cast< const std::string(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 9: _t->modifierUneReference(); break;
+        case 10: _t->enregistrerModificationReference((*reinterpret_cast< const std::string(*)>(_a[1])),(*reinterpret_cast< const std::string(*)>(_a[2]))); break;
         default: ;
         }
     }
@@ -113,9 +119,9 @@ int InterfaceBibliographie::qt_metacall(QMetaObject::Call _c, int _id, void **_a
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 11;
     }
     return _id;
 }

@@ -4,16 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../gestionBibliographie.cpp \
-../test.cpp 
+../gestionBibliographie.cpp 
 
 OBJS += \
-./gestionBibliographie.o \
-./test.o 
+./gestionBibliographie.o 
 
 CPP_DEPS += \
-./gestionBibliographie.d \
-./test.d 
+./gestionBibliographie.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

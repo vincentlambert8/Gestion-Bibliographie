@@ -2,6 +2,7 @@
 #define SUPPRIMERREFERENCE_H
 
 #include <QtGui/QDialog>
+#include <string>
 #include "ui_supprimerreference.h"
 
 class supprimerReference : public QDialog
@@ -13,8 +14,8 @@ public:
     ~supprimerReference();
     std::string reqIdentifiant() const;
 
-private slots:
-	void validerSupprimer();
+    private slots:
+		void validerSupprimer();
 
 private:
     Ui::supprimerReferenceClass ui;

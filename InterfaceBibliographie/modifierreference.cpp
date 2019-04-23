@@ -57,6 +57,9 @@ void modifierReference::validerModifier()
 			QMessageBox::information(this, "Message d'erreur", message);
 			return;
 		}
+		else{
+			accept();
+		}
 	}
 
 	if (code == "ISSN")
@@ -66,6 +69,9 @@ void modifierReference::validerModifier()
 			QString message = "L'identifiant ISSN entré n'est pas dans un format valide";
 			QMessageBox::information(this, "Message d'erreur", message);
 			return;
+		}
+		else{
+			accept();
 		}
 	}
 	else{
