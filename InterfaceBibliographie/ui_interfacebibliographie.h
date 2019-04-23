@@ -30,6 +30,7 @@ public:
     QAction *actionOuvrage;
     QAction *actionJournal;
     QAction *actionSupprimer;
+    QAction *actionModifier;
     QWidget *centralwidget;
     QPushButton *Quitter;
     QTextEdit *textEdit;
@@ -38,6 +39,7 @@ public:
     QMenuBar *menubar;
     QMenu *menuAjouter_une_r_f_rence;
     QMenu *menuSupprimerReference;
+    QMenu *menuModifier_une_r_f_rence;
 
     void setupUi(QMainWindow *InterfaceBibliographieClass)
     {
@@ -50,6 +52,8 @@ public:
         actionJournal->setObjectName(QString::fromUtf8("actionJournal"));
         actionSupprimer = new QAction(InterfaceBibliographieClass);
         actionSupprimer->setObjectName(QString::fromUtf8("actionSupprimer"));
+        actionModifier = new QAction(InterfaceBibliographieClass);
+        actionModifier->setObjectName(QString::fromUtf8("actionModifier"));
         centralwidget = new QWidget(InterfaceBibliographieClass);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         Quitter = new QPushButton(centralwidget);
@@ -72,13 +76,17 @@ public:
         menuAjouter_une_r_f_rence->setObjectName(QString::fromUtf8("menuAjouter_une_r_f_rence"));
         menuSupprimerReference = new QMenu(menubar);
         menuSupprimerReference->setObjectName(QString::fromUtf8("menuSupprimerReference"));
+        menuModifier_une_r_f_rence = new QMenu(menubar);
+        menuModifier_une_r_f_rence->setObjectName(QString::fromUtf8("menuModifier_une_r_f_rence"));
         InterfaceBibliographieClass->setMenuBar(menubar);
 
         menubar->addAction(menuAjouter_une_r_f_rence->menuAction());
         menubar->addAction(menuSupprimerReference->menuAction());
+        menubar->addAction(menuModifier_une_r_f_rence->menuAction());
         menuAjouter_une_r_f_rence->addAction(actionOuvrage);
         menuAjouter_une_r_f_rence->addAction(actionJournal);
         menuSupprimerReference->addAction(actionSupprimer);
+        menuModifier_une_r_f_rence->addAction(actionModifier);
 
         retranslateUi(InterfaceBibliographieClass);
         QObject::connect(Quitter, SIGNAL(clicked()), InterfaceBibliographieClass, SLOT(close()));
@@ -92,10 +100,12 @@ public:
         actionOuvrage->setText(QApplication::translate("InterfaceBibliographieClass", "Ajouter un ouvrage", 0, QApplication::UnicodeUTF8));
         actionJournal->setText(QApplication::translate("InterfaceBibliographieClass", "Ajouter un journal", 0, QApplication::UnicodeUTF8));
         actionSupprimer->setText(QApplication::translate("InterfaceBibliographieClass", "Supprimer", 0, QApplication::UnicodeUTF8));
+        actionModifier->setText(QApplication::translate("InterfaceBibliographieClass", "Modifier", 0, QApplication::UnicodeUTF8));
         Quitter->setText(QApplication::translate("InterfaceBibliographieClass", "Quitter", 0, QApplication::UnicodeUTF8));
         pushButton_afficherBiblio->setText(QApplication::translate("InterfaceBibliographieClass", "Afficher la bibliographie", 0, QApplication::UnicodeUTF8));
         menuAjouter_une_r_f_rence->setTitle(QApplication::translate("InterfaceBibliographieClass", "Ajouter une r\303\251f\303\251rence", 0, QApplication::UnicodeUTF8));
         menuSupprimerReference->setTitle(QApplication::translate("InterfaceBibliographieClass", "Supprimer une r\303\251f\303\251rence", 0, QApplication::UnicodeUTF8));
+        menuModifier_une_r_f_rence->setTitle(QApplication::translate("InterfaceBibliographieClass", "Modifier une r\303\251f\303\251rence", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

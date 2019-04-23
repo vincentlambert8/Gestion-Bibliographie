@@ -74,8 +74,15 @@
     </property>
     <addaction name="actionSupprimer"/>
    </widget>
+   <widget class="QMenu" name="menuModifier_une_r_f_rence">
+    <property name="title">
+     <string>Modifier une référence</string>
+    </property>
+    <addaction name="actionModifier"/>
+   </widget>
    <addaction name="menuAjouter_une_r_f_rence"/>
    <addaction name="menuSupprimerReference"/>
+   <addaction name="menuModifier_une_r_f_rence"/>
   </widget>
   <action name="actionOuvrage">
    <property name="text">
@@ -90,6 +97,11 @@
   <action name="actionSupprimer">
    <property name="text">
     <string>Supprimer</string>
+   </property>
+  </action>
+  <action name="actionModifier">
+   <property name="text">
+    <string>Modifier</string>
    </property>
   </action>
  </widget>
