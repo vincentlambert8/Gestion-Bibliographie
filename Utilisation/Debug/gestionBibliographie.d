@@ -1,19 +1,19 @@
 gestionBibliographie.o: ../gestionBibliographie.cpp \
- /home/etudiant/Bureau/New_TP3/source/Reference.h \
- /home/etudiant/Bureau/New_TP3/source/Ouvrage.h \
- /home/etudiant/Bureau/New_TP3/source/Reference.h \
- /home/etudiant/Bureau/New_TP3/source/Journal.h \
- /home/etudiant/Bureau/New_TP3/source/Bibliographie.h \
- /home/etudiant/Bureau/New_TP3/source/validationFormat.h
+ /home/etudiant/111156408_labocpp/source/Reference.h \
+ /home/etudiant/111156408_labocpp/source/Ouvrage.h \
+ /home/etudiant/111156408_labocpp/source/Reference.h \
+ /home/etudiant/111156408_labocpp/source/Journal.h \
+ /home/etudiant/111156408_labocpp/source/Bibliographie.h \
+ /home/etudiant/111156408_labocpp/source/validationFormat.h
 
-/home/etudiant/Bureau/New_TP3/source/Reference.h:
+/home/etudiant/111156408_labocpp/source/Reference.h:
 
-/home/etudiant/Bureau/New_TP3/source/Ouvrage.h:
+/home/etudiant/111156408_labocpp/source/Ouvrage.h:
 
-/home/etudiant/Bureau/New_TP3/source/Reference.h:
+/home/etudiant/111156408_labocpp/source/Reference.h:
 
-/home/etudiant/Bureau/New_TP3/source/Journal.h:
+/home/etudiant/111156408_labocpp/source/Journal.h:
 
-/home/etudiant/Bureau/New_TP3/source/Bibliographie.h:
+/home/etudiant/111156408_labocpp/source/Bibliographie.h:
 
-/home/etudiant/Bureau/New_TP3/source/validationFormat.h:
+/home/etudiant/111156408_labocpp/source/validationFormat.h:
