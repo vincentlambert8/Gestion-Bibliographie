@@ -4,6 +4,7 @@
 #include "journalqt.h"
 #include "Journal.h"
 #include "supprimerreference.h"
+#include "modifierreference.h"
 #include "Bibliographie.h"
 #include <qmessagebox.h>
 
@@ -19,6 +20,7 @@ InterfaceBibliographie::InterfaceBibliographie(QWidget *parent, string p_nomBibl
 	QObject::connect(ui.actionJournal, SIGNAL(triggered()), this, SLOT(ajouterJournal()));
 	QObject::connect(ui.pushButton_afficherBiblio, SIGNAL(clicked()), this, SLOT(afficherBibliographie()));
 	QObject::connect(ui.actionSupprimer, SIGNAL(triggered()), this, SLOT(supprimerUneReference()));
+	QObject::connect(ui.actionModifier, SIGNAL(triggered()), this, SLOT(modifierUneReference()));
 }
 
 InterfaceBibliographie::~InterfaceBibliographie()
@@ -152,4 +154,30 @@ bool InterfaceBibliographie::verifierReferenceAbsente(const string& p_identifian
 	}
 	return estAbsente;
 
+}
+
+void InterfaceBibliographie::modifierUneReference()
+{
+	modifierReference modifierQt;
+	if (modifierQt.exec())
+	{
+		enregistrerModificationReference(modifierQt.reqIdentifiant(), modifierQt.asgAuteurs());
+	}
+}
+
+void InterfaceBibliographie::enregistrerModificationReference(const std::string& p_identifiant, const std::string& p_auteurs)
+{
+	try{
+		if (verifierReferenceAbsente(p_identifiant))
+		{
+			throw ReferenceAbsenteException("La référence est absente de la bibliographie");
+		}
+		else
+		{
+			m_bibliographie.modifierReference(p_identifiant, p_auteurs);
+		}
+	}catch(const ReferenceAbsenteException& p_e){
+		QString message(p_e.what());
+		QMessageBox::information(this, "Message d'erreur", message);
+	}
 }

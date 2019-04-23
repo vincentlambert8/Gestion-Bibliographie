@@ -37,6 +37,8 @@ private slots:
 	void supprimerUneReference();
 	void enregistrerSuppressionReference(const std::string& p_identifiant);
 	bool verifierReferenceAbsente(const std::string& p_identifiant);
+	void modifierUneReference();
+	void enregistrerModificationReference(const std::string& p_identifiant, const std::string& p_auteurs);
 
 private:
     Ui::InterfaceBibliographieClass ui;

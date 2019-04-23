@@ -21,6 +21,7 @@ public:
 	~Bibliographie();
 	void ajouterReference(const Reference& p_nouvelleReference);
 	void supprimerReference(const std::string& p_identifiant);
+	void modifierReference(const std::string& p_identifiant, const std::string& p_auteurs);
 	const std::string reqBibliographieFormate() const;
 	const std::string& reqNomBibliographie() const;
 	const std::vector<Reference*> reqVecteur() const;

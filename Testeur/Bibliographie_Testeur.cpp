@@ -55,15 +55,12 @@ public:
  * \brief	Test de la méthode void ajouterReference(const Reference& p_nouvelleReference)
  * 			cas valide:
  * 				ajouterReference: 	vérification que l'objet Bibliographie est vide au départ, ajout d'une référence,
- * 									vérification que l'objet Bibliographie n'est plus vide. Vérification que ce que contient le vecteur contient
+ * 									vérification que l'objet Bibliographie n'est plus vide. Vérification que ce que le vecteur contient
  * 									est bien la référence ajoutée
  * 									Ajout d'une autre référence et vérification de ce qui a été ajouté dans le vecteur est bien la nouvelle référence
  * 			cas invalide:
  * 				ajouterReferenceDejaPresente:	vérification qu'il n'est pas possible d'ajouter une référence
  * 												déjà présente dans la bibliographie.
- *
- * 				ajouterReferenceInvalide:		vérification qu'il n'est pas possible d'ajouter une référence avec
- * 												paramètres invalides dans la bibliographie.
  */
 TEST_F(UneBibliographie, ajouterReference)
 {
@@ -126,8 +123,8 @@ TEST_F(UneBibliographie, ajouterReferenceDejaPresente)
 /**
  * \brief	Test de la méthode void supprimerReference(const string& p_identifiant)
  * 			cas valide:
- * 				ajouterReference: 	vérification que l'objet Bibliographie est vide au départ, ajout d'une référence,
- * 									vérification que l'objet Bibliographie n'est plus vide. Vérification que ce que contient le vecteur contient
+ * 				supprimerReference:	vérification que l'objet Bibliographie est vide au départ, ajout d'une référence,
+ * 									vérification que l'objet Bibliographie n'est plus vide. Vérification que ce que le vecteur contient
  * 									est bien la référence ajoutée
  * 									Supression de la référence et vérification que la taille du conteneur est à nouveau vide
  * 			cas invalide:
@@ -151,6 +148,37 @@ TEST_F(UneBibliographie, supprimerReference)
 	t_bibliographie.supprimerReference(t_ouvrage.reqIdentifiant());
 	ASSERT_TRUE(t_bibliographie.reqVecteur().empty())
 	;
+}
+
+
+/**
+ * \brief	Test de la méthode void modifierReference(const string& p_identifiant)
+ * 			cas valide:
+ * 				modifierReference: 	vérification que l'objet Bibliographie est vide au départ, ajout d'une référence,
+ * 									vérification que l'objet Bibliographie n'est plus vide. Vérification que ce que le vecteur contient
+ * 									est bien la référence ajoutée
+ * 									Modification de la référence et vérification que la référence a bien été modifiée à l'aide d'un accès
+ * 									en lecture à m_auteurs
+ * 			cas invalide:
+ * 				Aucun identifié
+ */
+TEST_F(UneBibliographie, modifierReference)
+{
+	Ouvrage t_ouvrage(		"Homayoon Beigi",
+							"Fundamentals of Speaker Recognition",
+							"New York",
+							"Springer",
+							2011,
+							"ISBN 978-0-387-77591-3");
+	ASSERT_TRUE((t_bibliographie.reqVecteur()).empty())
+	;
+	t_bibliographie.ajouterReference(t_ouvrage);
+	ASSERT_FALSE((t_bibliographie.reqVecteur()).empty())
+	;
+	t_bibliographie.modifierReference("ISBN 978-0-387-77591-3", "Hart");
+	ASSERT_EQ("Hart", (t_bibliographie.reqVecteur()[0]->reqAuteurs()))
+	;
+
 }
 
 

@@ -99,6 +99,35 @@ void Bibliographie::supprimerReference(const string& p_identifiant)
 }
 
 /**
+ * \fn Bibliographie::modifierReference(const string& p_identifiant)
+ * \brief Méthode permettant de modifier une référence à la bibliographie courante
+ * \param[in] p_identifiant est le code ISBN/ISSN de la référence à modifier de la bibliographie
+ * \pre[in] p_identifiant ne doit pas être absent de la bibliographie
+ */
+void Bibliographie::modifierReference(const string& p_identifiant, const string& p_auteurs)
+{
+	try{
+		if (ReferenceAbsente(p_identifiant))
+		{
+			throw ReferenceAbsenteException("La référence est absente de la bibliographie");
+		}
+		else
+		{
+			for (vector<Reference*>::iterator iter = m_vReferences.begin(); iter < m_vReferences.end(); iter++)
+			{
+				if ((*iter)->reqIdentifiant() == p_identifiant)
+				{
+					(*iter)->asgAuteurs(p_auteurs);
+				}
+			}
+		}
+	}catch (const ReferenceAbsenteException& p_e)
+	{
+		cout << p_e.what() << endl;
+	}
+}
+
+/**
  * \fn const vector<Reference*> Bibliographie::reqVecteur() const
  * \brief Méthode d'accès en lecture à l'attribut m_vReferences
  *
