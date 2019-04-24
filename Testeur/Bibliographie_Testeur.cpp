@@ -8,6 +8,7 @@
 
 #include "gtest/gtest.h"
 #include "Bibliographie.h"
+#include "ReferenceException.h"
 #include "Ouvrage.h"
 #include "Journal.h"
 #include "ContratException.h"

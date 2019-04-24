@@ -149,10 +149,12 @@ const string Bibliographie::reqBibliographieFormate() const
 	ostringstream os;
 	os << this->reqNomBibliographie() << endl;
 	os << "===============================" << endl;
-	for (size_t i = 0; i < m_vReferences.size(); i++)
+	int i = 0;
+	for (vector<Reference*>::const_iterator it = m_vReferences.begin(); it != m_vReferences.end(); it++)
 	{
-		os << "[" << i + 1 << "]" << " " << (*m_vReferences[i]).reqReferenceFormate();
+		os << "[" << i + 1 << "]" << " " << (*it)->reqReferenceFormate();
 		os << endl;
+		i++;
 	}
 	return os.str();
 }
@@ -178,9 +180,9 @@ const string& Bibliographie::reqNomBibliographie() const
 bool Bibliographie::ReferenceEstDejaPresente(const std::string& p_identifiant) const
 {
 	bool estDejaPresente = false;
-	for (size_t i = 0; i < m_vReferences.size(); i++)
+	for (vector<Reference*>::const_iterator it = m_vReferences.begin(); it != m_vReferences.end(); it++)
 	{
-		if (m_vReferences[i]->reqIdentifiant() == p_identifiant)
+		if ((*it)->reqIdentifiant() == p_identifiant)
 		{
 			estDejaPresente = true;
 		}
@@ -198,9 +200,9 @@ bool Bibliographie::ReferenceEstDejaPresente(const std::string& p_identifiant) c
 bool Bibliographie::ReferenceAbsente(const std::string & p_identifiant) const
 {
 	bool estAbsente = true;
-	for (size_t i = 0; i < m_vReferences.size(); i++)
+	for (vector<Reference*>::const_iterator it = m_vReferences.begin(); it != m_vReferences.end(); it++)
 	{
-		if (m_vReferences[i]->reqIdentifiant() == p_identifiant)
+		if ((*it)->reqIdentifiant() == p_identifiant)
 		{
 			estAbsente = false;
 		}
