@@ -23,7 +23,7 @@ private slots:
 							const std::string& p_editeur,
 							int p_annee,
 							const std::string& p_identifiant);
-	bool verifierReferenceDejaPresente(const std::string& p_identifiant);
+	bool verifierReferenceDejaPresente(const std::string& p_identifiant) const;
 	void ajouterJournal();
 	void enregistrerJournal(const std::string& p_auteurs,
 							const std::string& p_titre,
@@ -33,10 +33,10 @@ private slots:
 							int p_page,
 							int p_annee,
 							const std::string& p_identifiant);
-	void afficherBibliographie();
+	void afficherBibliographie() const;
 	void supprimerUneReference();
 	void enregistrerSuppressionReference(const std::string& p_identifiant);
-	bool verifierReferenceAbsente(const std::string& p_identifiant);
+	bool verifierReferenceAbsente(const std::string& p_identifiant) const;
 	void modifierUneReference();
 	void enregistrerModificationReference(const std::string& p_identifiant, const std::string& p_auteurs);
 

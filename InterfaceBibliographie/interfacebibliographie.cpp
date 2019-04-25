@@ -6,6 +6,7 @@
 #include "supprimerreference.h"
 #include "modifierreference.h"
 #include "Bibliographie.h"
+#include "moduleinit.cpp"
 #include <qmessagebox.h>
 
 
@@ -96,7 +97,7 @@ void InterfaceBibliographie::enregistrerJournal(const std::string& p_auteurs,
 	}
 }
 
-bool InterfaceBibliographie::verifierReferenceDejaPresente(const std::string& p_identifiant)
+bool InterfaceBibliographie::verifierReferenceDejaPresente(const std::string& p_identifiant) const
 {
 	bool estDejaPresente = false;
 	for (size_t i = 0; i < (m_bibliographie.reqVecteur()).size(); i++)
@@ -109,7 +110,7 @@ bool InterfaceBibliographie::verifierReferenceDejaPresente(const std::string& p_
 	return estDejaPresente;
 }
 
-void InterfaceBibliographie::afficherBibliographie()
+void InterfaceBibliographie::afficherBibliographie() const
 {
 	QString q(QString::fromStdString(m_bibliographie.reqBibliographieFormate()));
 	ui.textEdit->setText(q);
@@ -142,7 +143,7 @@ void InterfaceBibliographie::enregistrerSuppressionReference(const string& p_ide
 	}
 }
 
-bool InterfaceBibliographie::verifierReferenceAbsente(const string& p_identifiant)
+bool InterfaceBibliographie::verifierReferenceAbsente(const string& p_identifiant) const
 {
 	bool estAbsente = true;
 	for (size_t i = 0; i < (m_bibliographie.reqVecteur()).size(); i++)
